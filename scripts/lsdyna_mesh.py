@@ -5,8 +5,7 @@
 Pure Python + numpy (runs in Blender's Python). Handles *INCLUDE, fixed-width and comma-separated
 cards, *KEYWORD LONG=Y. Reads *NODE, *ELEMENT_SHELL[_THICKNESS|_BETA], *ELEMENT_SOLID (1- or 2-card),
 *PART (first data card only), *SECTION_SHELL (thickness), and the keyword name + density of each *MAT_.
-Only tested on synthetic decks so far (2026-11-20); check the printed summary against the model's
-published counts before trusting it.
+Reads beam endpoints. Checked against the published Yaris v1l bare-vehicle geometry counts.
 """
 import os
 import sys
@@ -15,14 +14,8 @@ import numpy as np
 
 def _lines(path, seen=None, base=None):
     seen = seen if seen is not None else set()
-    base = base or os.path.dirname(os.path.abspath(path))
-    p = path if os.path.isabs(path) else os.path.join(base, path)
-    if not os.path.exists(p):
-        alt = os.path.join(base, os.path.basename(path))
-        if not os.path.exists(alt):
-            print('  missing include:', path)
-            return
-        p = alt
+    p = os.path.abspath(os.path.join(base or '', path))
+    base = os.path.dirname(p)
     if p in seen:
         return
     seen.add(p)
@@ -55,6 +48,8 @@ def _fields(s, widths):
 
 
 def _f(x, d=0.0):
+    if not x:
+        return d
     try:
         return float(x)
     except ValueError:
@@ -76,7 +71,7 @@ def _i(x, d=0):
 
 
 def read(path):
-    nid, xyz, shells, solids = [], [], [], []
+    nid, xyz, shells, solids, beams = [], [], [], [], []
     parts, sect, mats = {}, {}, {}
     kw, card, long_all, pend = '', 0, False, None
     for s in _lines(path):
@@ -105,6 +100,9 @@ def read(path):
             if n[3] == 0:
                 n[3] = n[2]
             shells.append((_i(a[0]), _i(a[1]), *n))
+        elif k == '*ELEMENT_BEAM':
+            a = _fields(s, [8 * m] * 4)
+            beams.append(tuple(_i(v) for v in a[:4]))
         elif k.startswith('*ELEMENT_SOLID'):
             a = _fields(s, [8 * m] * 10)
             vals = [_i(v) for v in a if v != '']
@@ -137,11 +135,17 @@ def read(path):
     nid = np.array(nid, np.int64)
     xyz = np.array(xyz, np.float64).reshape(-1, 3)
     order = np.argsort(nid)
-    look = lambda ids: order[np.searchsorted(nid[order], ids)]
+    def look(ids):
+        indices = np.searchsorted(nid[order], ids)
+        if np.any(indices == len(nid)) or np.any(nid[order[indices]] != ids):
+            raise ValueError("element references a missing node")
+        return order[indices]
+    be = np.array(beams, np.int64).reshape(-1, 4)
     sh = np.array(shells, np.int64).reshape(-1, 6)
     so = np.array(solids, np.int64).reshape(-1, 10)
     pid = np.array(sorted(parts), np.int64)
     out = dict(node_id=nid, xyz=xyz,
+               beam_id=be[:, 0], beam_pid=be[:, 1], beam_n=look(be[:, 2:]),
                shell_id=sh[:, 0], shell_pid=sh[:, 1], shell_n=look(sh[:, 2:]) if len(sh) else sh[:, 2:],
                solid_id=so[:, 0], solid_pid=so[:, 1], solid_n=look(so[:, 2:]) if len(so) else so[:, 2:],
                part_id=pid, part_name=np.array([parts[p]['name'] for p in pid]),
@@ -152,6 +156,7 @@ def read(path):
 
 
 def summary(d):
+    print('beams', len(d['beam_id']))
     x = d['xyz']
     print('nodes %d  shells %d  solids %d  parts %d' % (len(x), len(d['shell_id']), len(d['solid_id']), len(d['part_id'])))
     if len(x):
