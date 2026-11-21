@@ -75,6 +75,6 @@ if __name__ == "__main__":
     history = extract(args.csv)
     derived(history, args.full_pulse)
     with args.output.open("w", newline="") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(history)
         w.writerows(zip(*history.values()))

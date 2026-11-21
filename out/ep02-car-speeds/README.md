@@ -1,6 +1,6 @@
 # 第二集交付状态
 
-官方车模已核实，56 km/h 正在试算，尚未通过全程验收。官方入口、工具版本、校验值和恢复步骤见[制作进度](../../PROGRESS.md)。
+官方车模已核实，56 km/h 已完成最初 5 ms，后续时段正在求解，全程验收待完成。官方入口、工具版本、校验值和恢复步骤见[制作进度](../../PROGRESS.md)。
 
 | 56 km/h 验收项 | 公开比较值或验收线 | 本集结果 |
 | --- | --- | --- |
@@ -20,3 +20,5 @@
 采用乔治梅森大学 CCSA 的 2010 Yaris 粗网格 v1l（2016-12），以及原包内配套的 NCAP 刚性墙。原包 README 记载项目由 FHWA 资助，要求使用者自行验证结果，CCSA 和 FHWA 对有效性、准确性及适用性不承担责任，并请求在使用模型的论文与出版物中致谢 GMU CCSA 和 FHWA。未将原包或提取的几何写入 Git。[原始下载](https://media.ccsa.gmu.edu/model/2010-toyota-yaris-coarse-v1l.zip)
 
 物理求解器使用 [OpenCourant 稳定版 20261011](https://github.com/OpenCourant/OpenCourant/releases/tag/latest-20261011)。试算与最终可发布结果的区别见根目录进度。
+
+[驾驶位构图试片](studies/approach-framing.png) 使用原车初始网格和美术道路、墙面及灯光。仅用于评估驾驶位构图。
