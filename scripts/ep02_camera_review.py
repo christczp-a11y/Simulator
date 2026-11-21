@@ -12,6 +12,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("shots",type=Path)
     p.add_argument("output",type=Path)
+    p.add_argument("--prefix",default="56kmh")
     args=p.parse_args()
     plans=json.loads(args.shots.read_text())
     args.output.mkdir(parents=True,exist_ok=True)
@@ -20,7 +21,7 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     fig,axes=plt.subplots(2,1,figsize=(8,5.7),layout="constrained")
-    with (args.output/"56kmh-camera-orientation.csv").open("w",newline="") as f:
+    with (args.output/f"{args.prefix}-camera-orientation.csv").open("w",newline="") as f:
         w=csv.writer(f,lineterminator="\n")
         w.writerow(["mode","shot","film_frame","film_s","solver_s","since_contact_s","eye_x_m","eye_y_m","eye_z_m",
                     "quat_w","quat_x","quat_y","quat_z","angular_speed_deg_per_film_s"])
@@ -37,7 +38,7 @@ def main():
             ax.set(ylabel="Angular speed (deg/s)",title={"main":"Approach and 30× impact","real":"Real-time replay"}[seq])
             ax.set_xlabel("Elapsed film time (s)")
             ax.legend(frameon=False,fontsize=8)
-    fig.savefig(args.output/"56kmh-camera-angular-speed.png",dpi=170)
+    fig.savefig(args.output/f"{args.prefix}-camera-angular-speed.png",dpi=170)
 
 
 if __name__=="__main__":main()

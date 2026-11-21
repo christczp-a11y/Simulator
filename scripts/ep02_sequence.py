@@ -23,6 +23,8 @@ def main():
     p.add_argument("--width",type=int,default=360)
     p.add_argument("--samples",type=int,default=12)
     p.add_argument("--frames",type=int,nargs="+")
+    p.add_argument("--save-scene",type=Path,help="Save the first measured pose as a local Blender scene")
+    p.add_argument("--gpu",action="store_true",help="Use a supported Cycles GPU, if available")
     args=p.parse_args(sys.argv[sys.argv.index("--")+1:])
     shots=json.loads(args.shots.read_text())[args.mode][args.sequence]
     args.output.mkdir(parents=True,exist_ok=True)
@@ -36,6 +38,21 @@ def main():
     scene=bpy.context.scene
     scene.camera=cam
     scene.render.engine="CYCLES"
+    if args.gpu:
+        preferences=bpy.context.preferences.addons["cycles"].preferences
+        for backend in ("OPTIX","HIP","METAL","ONEAPI","CUDA"):
+            try:
+                preferences.compute_device_type=backend
+                preferences.refresh_devices()
+            except (TypeError,RuntimeError):
+                continue
+            if any(d.type==backend for d in preferences.devices):
+                for device in preferences.devices:
+                    device.use=device.type==backend
+                scene.cycles.device="GPU"
+                break
+        else:
+            raise RuntimeError("No supported Cycles GPU was found.")
     scene.cycles.samples=args.samples
     scene.cycles.use_denoising=True
     scene.cycles.max_bounces=6
@@ -78,14 +95,21 @@ def main():
         previous_active=f["active"]
         cam.location=pose["eye_m"]
         cam.rotation_quaternion=pose["quaternion_wxyz"]
+    save_scene=args.save_scene
     for index in (args.frames if args.frames is not None else range(len(shots))):
         shot=shots[index]
         output=args.output/f"{index:04d}.png"
-        scene.render.filepath=str(output.resolve())
+        rendering=output.with_suffix(".partial.png")
+        scene.render.filepath=str(rendering.resolve())
+        if save_scene:
+            update(shot)
+            bpy.ops.wm.save_as_mainfile(filepath=str(save_scene.resolve()))
+            save_scene=None
         exposures=shot.get("shutter")
         if not exposures:
             update(shot)
             bpy.ops.render.render(write_still=True)
+            rendering.replace(output)
             continue
         # EXRs hold scene-linear radiance. Accumulate it before display
         # rendering so glass reflections and highlights blur at the correct intensity.
@@ -107,8 +131,9 @@ def main():
             merged=bpy.data.images.new("Integrated shutter",w,h,alpha=True,float_buffer=True)
             merged.pixels.foreach_set(acc/len(exposures))
             scene.render.image_settings.file_format="PNG"
-            merged.save_render(str(output.resolve()),scene=scene)
+            merged.save_render(str(rendering.resolve()),scene=scene)
             bpy.data.images.remove(merged)
+            rendering.replace(output)
 
 
 if __name__=="__main__":

@@ -1,6 +1,6 @@
 # 第二集交付状态
 
-官方车模已核实，56 km/h 已完成最初 5 ms，后续时段正在求解，全程验收待完成。官方入口、工具版本、校验值和恢复步骤见[制作进度](../../PROGRESS.md)。
+官方车模已核实。56 km/h 已正常算完 20 ms，19.901 ms 时重心纵向速度为 47.64 km/h，当前正从 20 ms 重启文件继续求解。[分段数据](physics/56kmh-checkpoints.csv) · [工具版本、来源与恢复步骤](../../PROGRESS.md)
 
 | 56 km/h 验收项 | 公开比较值或验收线 | 本集结果 |
 | --- | --- | --- |
@@ -11,9 +11,9 @@
 
 这些公开数字是车队统计。指定车型的全宽壁障试验包括 39.8 和 56.3 km/h。拟制作的 90 和 120 km/h 均超出这组试验范围；另一车型的 90 km/h 偏置试验不能直接验证本片。详见[数据和来源](../../data/ep02-car-crash-data.md)。
 
-车速历程、座椅安装点加速度、结构变形和舱内尺寸变化均待求解。行驶振动、受约束头部的弹簧阻尼响应和结构震颤是拟采用的镜头规则，本次尚未生成镜头，也没有添加玻璃、灰尘或火花效果。
+车速、座椅安装点加速度和网格变形均来自求解器。方向盘中心至驾驶座靠背的初始距离为 597.83 mm，19.0 ms 时为 592.77 mm。行驶振动、6 Hz 阻尼比 0.4 的头部弹簧和峰后震颤是摄影规则。道路、墙面材质和光照由 Blender 添加。当前画面仅有原模型的玻璃。
 
-仓库内已有第一集的界面声和过渡声。第二集仍缺车内行驶、金属压溃、玻璃碎裂及撞后零件落地的专用片段，需在配置 ElevenLabs 环境变量后生成。音效对帧、手机频段电平差、响度与真峰值均待成片实测。
+已测量 32 条现有 ElevenLabs 片段的全频与 300 Hz 以上电平。第二集专用的车内行驶、金属压溃、玻璃碎裂和零件落地声仍缺。现有金属及玻璃片段可剪用，行驶声和落地声留空。成片的时间表、响度和手机频段电平差须用最终剪辑实测。[素材电平表](asset-levels.csv)
 
 ## 模型来源与使用说明
 
@@ -22,3 +22,21 @@
 物理求解器使用 [OpenCourant 稳定版 20261011](https://github.com/OpenCourant/OpenCourant/releases/tag/latest-20261011)。试算与最终可发布结果的区别见根目录进度。
 
 [驾驶位构图试片](studies/approach-framing.png) 使用原车初始网格和美术道路、墙面及灯光。仅用于评估驾驶位构图。
+
+## 从已验收的物理解算生成画面
+
+在仓库根目录运行。输入为正式工况的逐帧缓存、原模型零件表及 10 kHz 历程。工作目录内生成的 `driver-seat.blend` 含原模型几何，保留在本机。
+
+```bash
+python3 scripts/ep02_render.py proof 56 out/ep02-car-speeds/physics/56kmh-history.csv work/cached56
+```
+
+这条命令生成两套各六张静帧、实速并排回放、相机朝向表、角速度图及间距表。实速对照同步播放三次，左侧是头部响应，右侧固定在座椅横梁。合适的 GPU 可加 `--gpu`。正式素材使用 `film`、1080×1920、Cycles 降噪，按每档已完成的工况执行。以下命令展示单档流程，多档合成时在 `ep02_picture.py` 命令末尾依次列出已渲染的速度。
+
+```bash
+python3 scripts/ep02_render.py film 56 out/ep02-car-speeds/physics/56kmh-history.csv work/cached56 --gpu
+python3 scripts/ep02_picture.py work/picture work/picture/film.json 56
+node remotion/render-car.mjs work/picture/film.json work/picture out/ep02-car-speeds/ep02-silent.mp4
+python3 scripts/ep02_sound.py mix work/picture/film.json work/picture/mix.wav out/ep02-car-speeds/sound-cues.csv
+python3 scripts/ep02_master.py work/picture/film.json out/ep02-car-speeds/ep02-silent.mp4 work/picture/mix.wav out/ep02-car-speeds/ep02.mp4 out/ep02-car-speeds/qa.json
+```

@@ -1,0 +1,3 @@
+segment,native_end_ms,last_sample_ms,cg_longitudinal_kmh,front_wall_force_kN,max_abs_energy_residual_pct,max_abs_hourglass_internal_pct
+1,5.0,4.900249,56.0071,4.8007,0.007054,0.0
+2,20.0,19.90073,47.6371,390.1792,0.213313,0.0
