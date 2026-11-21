@@ -28,3 +28,8 @@ export LD_LIBRARY_PATH="$OPENRADIOSS_PATH/extlib/hm_reader/linux64:$OPENRADIOSS_
 "$OPENRADIOSS_PATH/exec/starter_linux64_gf" -v
 "$OPENRADIOSS_PATH/exec/engine_linux64_gf" -v
 ```
+
+## 已独立验证的后期环节
+
+- 在 `remotion/` 按锁文件安装了 247 个包。指定的 `npx remotion browser ensure` 下载浏览器时无法解析 remotion.media；使用本机 Chromium 成功渲染了第一集第 690 帧结束卡。复查命令为 `npx --no-install remotion still src/index.ts Short ../work/ep01-end-check.png --frame=690 --browser-executable=/usr/bin/chromium --scale=0.25`。这个检查只覆盖 Remotion 合成环境。
+- 已在原音效清单末尾加入四条汽车专用提示词。生成器已改为仅从环境变量取密钥，并拒绝 HTTP 重定向。在没有密钥的本机运行，脚本在发出请求前退出，已有 MP3 可继续复用。
