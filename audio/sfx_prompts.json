@@ -1,0 +1,194 @@
+[
+ {
+  "name": "n_cockpit",
+  "seconds": 6,
+  "influence": 0.5,
+  "text": "Interior of a small business jet cockpit in a steep high-speed dive: loud rushing wind roar over the windshield, twin jet engines whining at high power, airframe rattling and vibrating. Continuous, steady, realistic field recording. No music, no voices."
+ },
+ {
+  "name": "n_alarm",
+  "seconds": 3,
+  "influence": 0.6,
+  "text": "Aircraft cockpit ground proximity warning alarm: urgent repeating electronic whoop-whoop tone, loud and close, realistic avionics speaker. No voice, no music."
+ },
+ {
+  "name": "n_slowdown",
+  "seconds": 3,
+  "influence": 0.5,
+  "text": "Bullet-time transition: loud jet wind roar suddenly slowing down into slow motion, pitch dropping and stretching into a deep muffled low rumble, like time grinding to a halt. No music, no voices."
+ },
+ {
+  "name": "n_bullet",
+  "seconds": 15,
+  "influence": 0.5,
+  "text": "Bullet time ambience, extreme slow motion: deep muffled low drone as if underwater, slowed-down air rumbling, time almost frozen, dark and tense, very low frequencies, sparse, continuous. No melody, no music, no voices."
+ },
+ {
+  "name": "n_impact_slow",
+  "seconds": 5,
+  "influence": 0.6,
+  "text": "Extreme slow motion sound of an aircraft nose hitting the ground: one huge deep booming impact, slowed down, heavy low-frequency thud followed by a long stretched crunch of fiberglass and metal collapsing. No music, no voices."
+ },
+ {
+  "name": "n_crumple",
+  "seconds": 10,
+  "influence": 0.6,
+  "text": "Slow motion aluminum aircraft fuselage crumpling and tearing: deep stretched metal groans, sheet metal buckling, rivets popping one by one, long low screech of tearing metal, close perspective, slowed down. No music, no voices."
+ },
+ {
+  "name": "n_dirt_spray",
+  "seconds": 8,
+  "influence": 0.6,
+  "text": "Slow motion wave of soil, dirt clods and gravel spraying against a thick glass windshield: many dull thuds and gritty patter of earth hitting glass, growing denser and louder, slowed down, close interior perspective. No music, no voices."
+ },
+ {
+  "name": "n_dirt_hit1",
+  "seconds": 1,
+  "influence": 0.7,
+  "text": "Single heavy clod of wet soil hitting a glass window, one dull thud with gritty scatter, close, dry recording."
+ },
+ {
+  "name": "n_dirt_hit2",
+  "seconds": 1,
+  "influence": 0.7,
+  "text": "A handful of gravel and dirt hitting a car windshield once, one sharp gritty smack on glass, close, dry recording."
+ },
+ {
+  "name": "n_dirt_hit3",
+  "seconds": 1.2,
+  "influence": 0.7,
+  "text": "One large lump of earth slamming against a thick acrylic window, single deep thump with crumbling soil, close, dry recording."
+ },
+ {
+  "name": "n_glass",
+  "seconds": 4,
+  "influence": 0.6,
+  "text": "Thick acrylic aircraft windshield cracking in slow motion: sharp cracks spreading, splintering and creaking, then breaking into pieces, slowed down, close. No music, no voices."
+ },
+ {
+  "name": "n_tick",
+  "seconds": 0.5,
+  "influence": 0.8,
+  "text": "Single mechanical stopwatch tick, one sharp crisp click, close microphone, dry."
+ },
+ {
+  "name": "n_flap",
+  "seconds": 0.6,
+  "influence": 0.8,
+  "text": "One split-flap display card flipping, single crisp mechanical clack, close, dry."
+ },
+ {
+  "name": "n_flaproll",
+  "seconds": 3,
+  "influence": 0.7,
+  "text": "Split-flap departure board with many digits flipping very fast, continuous rapid mechanical clattering, close, dry. No voices."
+ },
+ {
+  "name": "n_stop",
+  "seconds": 2.5,
+  "influence": 0.5,
+  "text": "Sudden freeze: everything cuts out with one deep sub bass boom and a short reverse suction, then silence. No music, no voices."
+ },
+ {
+  "name": "n_rewind",
+  "seconds": 1.5,
+  "influence": 0.6,
+  "text": "Video tape rewinding at high speed: fast whirring tape squeal rising in pitch, ending abruptly with a click. No music, no voices."
+ },
+ {
+  "name": "n_crash",
+  "seconds": 4,
+  "influence": 0.6,
+  "text": "Small jet aircraft crashing nose-first into a field at full speed, heard from inside the cockpit: instant enormous violent impact, explosive crunch of metal, glass shattering, earth bursting, extremely loud and sudden, real time. No music, no voices."
+ },
+ {
+  "name": "n_pop",
+  "seconds": 1,
+  "influence": 0.7,
+  "text": "Short satisfying user interface pop: soft bubbly pop with a tiny bright click, clean modern app notification sound. No music."
+ },
+ {
+  "name": "n_electric",
+  "seconds": 1.5,
+  "influence": 0.6,
+  "text": "Cockpit electronics shorting out: buzzing electrical arc and crackle, then a descending power-down hum as screens die. No music, no voices."
+ },
+ {
+  "name": "n_debris",
+  "seconds": 6,
+  "influence": 0.6,
+  "text": "Slow motion debris storm passing the listener: dry crop stalks snapping, soil clods and metal fragments whooshing past close to the ears, heavy slowed-down whooshes and thuds. No music, no voices."
+ },
+ {
+  "name": "n2_nose_a",
+  "seconds": 5,
+  "influence": 0.6,
+  "text": "Enormous aircraft crash impact heard in slow motion from inside the cockpit: a violent explosive metallic bang with a hard cracking mid-range punch, then a long roaring tail of crunching aluminum, shattering fiberglass and grinding earth. Very loud, aggressive, full frequency range, bright, not muffled. No music, no voices."
+ },
+ {
+  "name": "n2_nose_b",
+  "seconds": 5,
+  "influence": 0.5,
+  "text": "Cinematic slow motion car-crash style impact, but much bigger: a jet nose smashing into the ground, massive crunching smash of metal and composite, loud harsh crack at the start, heavy tearing and crumbling debris tail. Loud, close, harsh mid frequencies. No music, no voices."
+ },
+ {
+  "name": "n2_belly",
+  "seconds": 4,
+  "influence": 0.6,
+  "text": "Colossal heavy slam: a ten-ton metal aircraft fuselage smashing flat onto hard ground, thunderous crash with a loud metallic clang and crunch, ground shaking, harsh and bright, followed by rattling debris. Very loud, not muffled. No music, no voices."
+ },
+ {
+  "name": "n2_metal_tear",
+  "seconds": 8,
+  "influence": 0.6,
+  "text": "Loud violent metal destruction: aluminum aircraft structure being ripped apart, harsh screeching tearing metal, heavy crunching and buckling, loud bangs of snapping frames, continuous and aggressive, close and bright. No music, no voices."
+ },
+ {
+  "name": "n2_earth_blast",
+  "seconds": 5,
+  "influence": 0.6,
+  "text": "Huge eruption of earth: a heavy object ploughing into a dirt field at high speed, explosive burst of soil, rocks and gravel thrown into the air, loud roaring gritty blast like a landslide hitting, powerful and close. No leaves, no rustling, no music, no voices."
+ },
+ {
+  "name": "n2_bullet",
+  "seconds": 15,
+  "influence": 0.5,
+  "text": "Tense slow motion ambience for a bullet-time scene: deep time-stretched roar with an eerie sustained metallic mid-frequency tone and slow airy whooshes, ominous, clearly audible on small phone speakers, continuous, no rhythm. No melody, no music, no voices."
+ },
+ {
+  "name": "n2_stop",
+  "seconds": 2.5,
+  "influence": 0.6,
+  "text": "Hard cinematic stop hit: one punchy impact with a sharp loud mid-range thwack and metallic slam, then a short reverse whoosh sucking into silence. No music, no voices."
+ },
+ {
+  "name": "n2_panel",
+  "seconds": 3,
+  "influence": 0.6,
+  "text": "Aircraft instrument panel being crushed: glass displays shattering, plastic cracking and splintering, metal bending, loud close crunch. No music, no voices."
+ },
+ {
+  "name": "n2_rock_hit",
+  "seconds": 1.5,
+  "influence": 0.7,
+  "text": "A heavy rock slamming into a thick aircraft windshield, one loud hard crack and thud, close, dry recording."
+ },
+ {
+  "name": "ir_field_a",
+  "seconds": 4,
+  "influence": 0.7,
+  "text": "A single gunshot fired outdoors in a wide open farm field, recorded from 20 meters away: one sharp crack, then its natural echo slapping back from a distant tree line and rolling away across the open landscape, long fading outdoor tail. No other sounds, no wind, no birds, no voices."
+ },
+ {
+  "name": "ir_field_b",
+  "seconds": 4,
+  "influence": 0.7,
+  "text": "One loud starter pistol shot in a broad open valley with distant hills and trees: a single dry bang followed by a clear distant echo and a long soft rolling decay in the open air. Only one shot. No other sounds, no music, no voices."
+ },
+ {
+  "name": "ir_field_c",
+  "seconds": 5,
+  "influence": 0.6,
+  "text": "A single very loud firecracker explosion in an empty open countryside, heard outdoors: one bang, then the sound rolling and echoing far across flat fields and distant woods, slowly fading. Only one explosion, nothing else. No voices, no music."
+ }
+]

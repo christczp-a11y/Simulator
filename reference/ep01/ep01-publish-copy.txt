@@ -1,0 +1,91 @@
+﻿第一集发布文案（Learjet 驾驶舱 Short）
+整理时间 2026-11-20。英文部分直接复制粘贴，中文是给你看的说明。
+成片文件：ep01-learjet-cockpit-short.mp4（同一文件夹）
+
+==================================================
+一、标题（选一个，建议用 1）
+==================================================
+
+1.  learjet vs ground at 342 km/h (pov)          ← 建议。35 个字符
+2.  342 km/h into the ground. pilot's view        38 个字符
+3.  what 521 g looks like from the cockpit        38 个字符
+4.  32 milliseconds, slowed 500x                  28 个字符
+
+为什么这样写：
+- 手机 Shorts 信息流里标题大约 40 个字符就被截断，所以全部压在 40 以内，关键词放最前面。（vidIQ 2026-06）
+- 同类高播放的写法是很短的 "X vs Y" 加一个数字，例如 BeamNG Nation 的
+  "Cars vs Massive Speed Bumps – BeamNG.Drive" 1.52 亿次播放。（Know Your Meme 词条）
+- 全小写是跟频道横幅和片内界面保持一致。想要更利于搜索可以改成首字母大写，意思不变。
+- 没写任何真实事故的名字，这是你定的规矩。
+
+==================================================
+二、简介（整段复制）
+==================================================
+
+a learjet 60 meets a field at 342 km/h (213 mph), seen from the left seat. the last 32 milliseconds are slowed down 500x.
+
+this is a computer simulation. it is not real footage and it does not reconstruct any real accident. speed, g-force and timing come from our own physics model (peak 521 g at the seat), so read them as estimates, not measurements.
+
+made with blender and a custom material-point solver. sound effects generated with elevenlabs.
+
+#simulation #planecrash #slowmotion
+
+说明：
+- 第二段的声明不能删。同类视频出事都出在这里：TikTok @OldTenderMan 的 BeamNG 撞车视频被转发后
+  丢了 #beamng 标签，被当成真实碰撞测试，最后要电视台出面辟谣（KGW Verify）。
+- 片里的 342 km/h、521 g、32 毫秒都是我们自己模型算出来的，不是实测，所以写了 estimates。
+- 话题标签只放 3 个。备选：#aviation #physics #cockpit。
+
+==================================================
+三、置顶评论（选一个）
+==================================================
+
+A.  which disaster's last second should we slow down next?      ← 建议
+B.  next: one car, one wall, five speeds. where do you think the cabin stops holding?
+
+说明：A 顺便帮你收集观众想看什么题材。B 要等第二集确定做撞车再用。
+
+==================================================
+四、上传时的设置
+==================================================
+
+1. "AI use / 是否含有经过修改或合成的内容"：选 Yes。
+   依据是 YouTube 帮助页的规定：生成"看起来真实、但没有发生过的场景"必须声明。
+   这条片子是写实的驾驶舱画面，属于这一类。同一页写明，声明本身不会限制推荐和收益。
+   另外要知道：这个 mp4 文件里带有一个内容凭证标记（C2PA，写的是"Claude 提供了这个文件"）。
+   YouTube 会自动给带这种标记的视频加 AI 标签，而且这种自动标签创作者改不掉。
+   所以选 Yes 和实际结果是一致的。
+2. 受众：不是面向儿童的内容。
+3. 类别：Science & Technology。
+4. 封面帧：建议选第 11 秒左右（g 值最高、机头压溃最明显的那一帧）。
+
+==================================================
+五、发布前你要自己确认的一件事
+==================================================
+
+ElevenLabs 的音效能不能商用，取决于你账号的套餐。我的印象是免费套餐不含商用授权并且要求署名，
+但我没有核实你账号的套餐，这一点不确定。简介里已经写了 "sound effects generated with elevenlabs"，
+署名这一条是满足的；频道要开收益的话，你看一眼套餐页确认商用授权。
+
+==================================================
+六、参考的同类写法（供以后几集沿用）
+==================================================
+
+- BeamNG 类短视频（Shorts 上播放量最大的撞车模拟类型）：标题极短，"X vs Y"，带车的表情符号，
+  简介和标签里写明工具名（#beamng #gaming）。
+- 速度对比系列有先例：@oldtenderman 做过同一组车 10、30、50、80、120、200、300 mph 逐级对撞，
+  被 Supercar Blondie 专门报道。
+- 一万多条热门 Shorts 标题的统计（TunePocket 2025）：平均 51 个字符、8 个词；31.7% 带表情符号；
+  12.8% 带数字；平均 4.3 个话题标签。注意这是"常见程度"，不是"效果好坏"，别当成规律。
+
+我的判断：Shorts 是系统推到观众面前的，观众先看到画面再看到标题，所以标题和简介的作用
+比长视频小得多，决定去留的是前一两秒的画面。文案做到不出错、不误导、可搜索就够了，不值得反复打磨。
+
+来源：
+https://vidiq.com/blog/post/youtube-shorts-titles/
+https://www.tunepocket.com/youtube-shorts-video-titles/
+https://knowyourmeme.com/memes/car-crash-overstimulation-videos
+https://supercarblondie.com/impact-of-crash-varying-speeds
+https://www.kgw.com/article/news/verify/technology-verify/viral-video-of-an-suv-vehicle-crash-test-not-real-fact-check/536-e19892ac-a3cd-4591-85fd-1f263f905257
+https://www.thedrive.com/news/no-those-viral-beamng-crash-test-videos-arent-realistic
+https://support.google.com/youtube/answer/14328491

@@ -1,0 +1,9 @@
+[
+ {"name": "amb", "seconds": 5.0, "influence": 0.5, "text": "Inside the cockpit of a small business jet in a steep high-speed dive: loud roaring wind rush, two screaming jet engines, the airframe rattling, an urgent repeating electronic warning alarm tone. No speech, no music."},
+ {"name": "drop", "seconds": 2.5, "influence": 0.5, "text": "Cinematic slow-motion transition: roaring wind and engine noise suddenly pitches down and stretches as time slows, sinking into a deep sub-bass drone. No music."},
+ {"name": "slowmo", "seconds": 14.0, "influence": 0.5, "text": "Extreme slow motion of an aircraft hitting the ground, heard from inside the cockpit: very deep groaning and buckling aluminium, slow metallic tearing and creaking, low rumbling earth, muffled and heavy, slowly building in intensity. No speech, no music."},
+ {"name": "rewind", "seconds": 1.6, "influence": 0.6, "text": "Fast tape rewind: a video scrubbing backwards quickly, rising whirr and reversed whoosh, ending abruptly with a click."},
+ {"name": "crash", "seconds": 2.5, "influence": 0.5, "text": "A jet aircraft slams into the ground at full speed: an instant enormous impact with no build-up, violent metal crunch and a burst of debris, extremely loud and short."},
+ {"name": "pop", "seconds": 1.2, "influence": 0.6, "text": "A bold punchy whoosh into a deep cinematic impact hit, short and clean, like a modern trailer title slamming onto the screen."},
+ {"name": "flap", "seconds": 0.5, "influence": 0.7, "text": "One single crisp mechanical clack of a split-flap display digit flipping over, dry and close, no reverb."}
+]

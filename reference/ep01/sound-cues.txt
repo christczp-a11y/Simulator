@@ -1,0 +1,26 @@
+  0.00-  2.70 s  frame   0  n_flaproll     countdown digits rolling
+  0.00-  7.60 s  frame   0  n_alarm        ground proximity warning; slows down with the picture
+  0.00-  7.60 s  frame   0  n_cockpit      cockpit wind and engines; slows down and drops in pitch with the picture
+  0.00- 17.40 s  frame   0  ir_field_a     outdoor space on every scene sound: open-field echo and decay, slowed with the picture
+  2.55-  4.75 s  frame  77  n_flaproll     countdown digits rolling, slowing with the picture
+  2.60-  5.47 s  frame  78  n_slowdown     slow-motion transition
+  2.60- 17.40 s  frame  78  n_tick         countdown: 34 ticks, one per millisecond
+  2.70- 17.07 s  frame  81  n_bullet       bullet-time low drone
+  4.60-  9.46 s  frame 138  n_impact_slow  low boom under the nose hit
+  4.60-  9.87 s  frame 138  n2_nose_b      EVENT 1, nose hits the ground: one crash played 3.3 times slower, rings until the belly hits
+  7.37- 20.37 s  frame 221  n2_belly       EVENT 2, belly hits the ground: one slam played 3.3 times slower
+  7.57- 14.07 s  frame 227  n2_earth_blast the earth it throws up, 3.6 times slower (tail of event 2)
+ 10.30- 17.40 s  frame 309  n_bullet       bullet-time low drone, second pass
+ 11.07- 17.40 s  frame 332  n2_metal_tear  EVENT 3, peak g: the cockpit structure tears, one take played 3 times slower
+ 14.30- 17.40 s  frame 429  n2_bullet      swell into the freeze
+ 14.53- 17.40 s  frame 436  n_glass        EVENT 4, the windshield breaks: 2.5 times slower
+ 17.40- 17.85 s  frame 522  n_flap         freeze: the clock lands on 0.0000
+ 17.40- 18.40 s  frame 522  n2_stop        freeze: hard stop hit
+ 17.40- 18.40 s  frame 522  n_stop         freeze: low boom, everything else cuts
+ 18.36- 19.81 s  frame 551  n_rewind       tape rewind; ends where the picture stops
+ 20.13- 20.57 s  frame 604  n_alarm        warning at real speed
+ 20.13- 20.57 s  frame 604  n_cockpit      cockpit at real speed
+ 20.13- 23.47 s  frame 604  ir_field_a     outdoor echo of the real-speed crash, rolls on under the end card
+ 20.53- 20.87 s  frame 616  n_crash        the crash at real speed, through the black frames
+ 20.87- 21.82 s  frame 626  n_pop          subscribe pops
+ 21.23- 21.68 s  frame 637  n_flap         flip clock lands on 0.032

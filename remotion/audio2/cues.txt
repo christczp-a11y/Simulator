@@ -1,0 +1,42 @@
+  0.00-  2.70 s  frame   0  n_flaproll     countdown digits rolling
+  0.00-  2.95 s  frame   0  n_alarm        ground proximity warning
+  0.00-  3.60 s  frame   0  n_cockpit      cockpit wind and engines; fades out as time slows
+  1.40-  9.10 s  frame  42  n2_bullet      bullet-time swell into the slow motion
+  2.50-  4.20 s  frame  75  n_flaproll     countdown digits rolling, slowing
+  2.60-  5.47 s  frame  78  n_slowdown     slow-motion transition
+  2.60- 17.40 s  frame  78  n_tick         countdown: 34 ticks, one per millisecond
+  2.70- 17.07 s  frame  81  n_bullet       bullet-time low drone
+  4.60-  6.79 s  frame 138  n2_nose_a      nose hit, second layer: hard metallic bang
+  4.60-  9.46 s  frame 138  n_impact_slow  nose hit, low boom underneath
+  4.60-  9.55 s  frame 138  n2_nose_b      NOSE HITS THE GROUND (slow motion): big crunching smash
+  4.90- 11.09 s  frame 147  n_crumple      metal groans under the tearing
+  5.50-  9.50 s  frame 165  n2_metal_tear  nose structure tearing
+  7.07- 14.74 s  frame 212  n_dirt_spray   soil spraying on the windshield
+  7.37- 11.27 s  frame 221  n2_belly       BELLY HITS THE GROUND: heavy slam
+  7.42- 12.33 s  frame 222  n2_earth_blast earth erupting in front of the windshield
+  8.73-  9.70 s  frame 262  n_dirt_hit2    rock or clod hits the glass
+  8.77- 16.47 s  frame 263  n2_bullet      bullet-time swell on peak g
+  9.70- 11.15 s  frame 291  n2_rock_hit    rock or clod hits the glass
+ 10.30- 17.40 s  frame 309  n_bullet       bullet-time low drone, second pass
+ 10.60- 11.51 s  frame 318  n_dirt_hit1    rock or clod hits the glass
+ 11.07- 17.40 s  frame 332  n2_metal_tear  PEAK G: cockpit structure ripping apart
+ 11.60- 17.40 s  frame 348  n_dirt_spray   soil spray, second pass
+ 11.73- 13.18 s  frame 352  n2_rock_hit    rock or clod hits the glass
+ 11.90- 15.87 s  frame 357  n_glass        windshield cracks, then breaks
+ 12.47- 13.44 s  frame 374  n_dirt_hit2    rock or clod hits the glass
+ 13.07- 16.04 s  frame 392  n2_panel       instrument panel crushed
+ 13.40- 14.60 s  frame 402  n_electric     instrument panel shorts out
+ 13.73- 15.18 s  frame 412  n2_rock_hit    rock or clod hits the glass
+ 14.30- 17.40 s  frame 429  n2_bullet      bullet-time swell into the freeze
+ 14.37- 15.28 s  frame 431  n_dirt_hit1    rock or clod hits the glass
+ 15.43- 16.88 s  frame 463  n2_rock_hit    rock or clod hits the glass
+ 16.30- 17.27 s  frame 489  n_dirt_hit2    rock or clod hits the glass
+ 17.40- 17.85 s  frame 522  n_flap         freeze: the clock lands on 0.0000
+ 17.40- 18.40 s  frame 522  n2_stop        freeze: hard stop hit
+ 17.40- 18.40 s  frame 522  n_stop         freeze: low boom, everything else cuts
+ 18.36- 19.81 s  frame 551  n_rewind       tape rewind; ends where the picture stops
+ 20.13- 20.57 s  frame 604  n_alarm        warning at real speed
+ 20.13- 20.57 s  frame 604  n_cockpit      cockpit at real speed
+ 20.53- 20.87 s  frame 616  n_crash        the crash at real speed, through the black frames
+ 20.87- 21.82 s  frame 626  n_pop          subscribe pops
+ 21.23- 21.68 s  frame 637  n_flap         flip clock lands on 0.032

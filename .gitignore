@@ -1,0 +1,15 @@
+# secrets: never commit keys
+*.env
+api-keys*
+# heavy or generated
+node_modules/
+__pycache__/
+*.wav
+work/
+frames/
+*.vtk
+*A[0-9][0-9][0-9]
+*.h3d
+*_0001.rad
+*.rst
+*.blend1
