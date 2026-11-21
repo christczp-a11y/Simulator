@@ -37,3 +37,11 @@ export LD_LIBRARY_PATH="$OPENRADIOSS_PATH/extlib/hm_reader/linux64:$OPENRADIOSS_
 
 - 在 `remotion/` 按锁文件安装了 247 个包。指定的 `npx remotion browser ensure` 下载浏览器时无法解析 remotion.media；使用本机 Chromium 成功渲染了第一集第 690 帧结束卡。复查命令为 `npx --no-install remotion still src/index.ts Short ../work/ep01-end-check.png --frame=690 --browser-executable=/usr/bin/chromium --scale=0.25`。这个检查只覆盖 Remotion 合成环境。
 - 已在原音效清单末尾加入四条汽车专用提示词。生成器已改为仅从环境变量取密钥，并拒绝 HTTP 重定向。在没有密钥的本机运行，脚本在发出请求前退出，已有 MP3 可继续复用。
+
+### 初速度复核与修正
+
+- 第一帧 VTK 显示，普通车身节点达到 15,555.6 mm/s，但部分转向节和轮毂刚体被导入成零速。0.5 ms 时转向节只前移约 2.04 mm，车身侧板已前移 7.75 mm。已舍弃这次试算。
+- 在同一原模上用 `scripts/ep02_rigid_velocity.py` 给 20 个独立刚体显式传入原速度场，另外两件并在转向节中。旋转件的质心速度由原轴线、半径 303 mm 和 Starter 输出的质心计算。未改材料、质量、铰链和接触参数。
+- 在有效的 `work/corrected56/` 工况中，逐点核对原模型全部壳、梁和实体的初速，最大向量误差 0.0702 mm/s（VTK 文本精度）。初始驾驶座横梁和重心的纵向速度与 56 km/h 一致。
+- 已用两张真实求解动画测试分帧缓存，保留原生时间、单元/节点/零件 ID、拓扑与逐帧侵蚀状态；不会将整段动画堆入内存。通过官方转换器同时读取 T01 和 T01_TITLES，验证可提取座椅、左右 B 柱、重心、壁障反力和能量通道。首帧单位检查不代表全程通过。
+- 复跑时先对新工况运行 Starter，再从同工况的报告运行刚体速度脚本，再次运行 Starter 生成正式重启文件，最后执行 Engine。官方程序与模型留在 work/。分支已建[草稿 PR #1](https://github.com/christczp-a11y/Simulator/pull/1)。
