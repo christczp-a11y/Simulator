@@ -6,6 +6,7 @@ match throughout a run. Blender can consume frames out of core.
 """
 import argparse
 import hashlib
+import fcntl
 from pathlib import Path
 import re
 import subprocess
@@ -48,12 +49,37 @@ def convert(data):
     return top, dict(time_s=t, xyz=xyz, active=active.astype(bool))
 
 
-def cache(converter, animations, output):
+def cache(converter, animations, output, resume=False):
     output.mkdir(parents=True, exist_ok=True)
-    if any(output.iterdir()):
-        raise ValueError("Use an empty output directory for each run.")
+    with (output / ".writer.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        build_cache(converter, animations, output, resume)
+
+
+def write_arrays(path, **arrays):
+    temporary = path.with_suffix(".part")
+    with temporary.open("wb") as f:
+        np.savez_compressed(f, **arrays)
+    temporary.replace(path)
+
+
+def build_cache(converter, animations, output, resume):
+    if not resume and any(p.name != ".writer.lock" for p in output.iterdir()):
+        raise ValueError("Use an empty output directory or explicitly resume.")
     times, fingerprint = [], None
+    if resume and (output / "mesh.npz").is_file():
+        with np.load(output / "mesh.npz") as mesh:
+            fingerprint = bytes(mesh["fingerprint"])
     for index, filename in enumerate(animations):
+        packed = output / f"frame-{index:04d}.npz"
+        with filename.open("rb") as stream:
+            source_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+        if resume and packed.exists():
+            with np.load(packed) as frame:
+                if fingerprint is None or str(frame["source_hash"]) != source_hash:
+                    raise ValueError(f"Cached frame does not match {filename}")
+                times.append(float(frame["time_s"]))
+            continue
         with tempfile.TemporaryFile(dir=output) as vtk:
             subprocess.run([str(converter.resolve()), str(filename.resolve())], stdout=vtk, check=True)
             vtk.seek(0)
@@ -64,15 +90,17 @@ def cache(converter, animations, output):
         if index == 0:
             fingerprint = digest.digest()
             quad, tri, qi, ti = faces(top)
-            np.savez_compressed(output / "mesh.npz", **top, quad=quad, tri=tri, quad_cell=qi, tri_cell=ti)
+            write_arrays(output / "mesh.npz", **top, fingerprint=np.frombuffer(fingerprint, dtype=np.uint8), quad=quad, tri=tri, quad_cell=qi, tri_cell=ti)
         if digest.digest() != fingerprint:
             raise ValueError(f"Connectivity or IDs changed at {filename.name}")
         t = frame["time_s"]
         if times and t <= times[-1]:
             raise ValueError(f"Non-increasing solver time at {filename.name}")
         times.append(t)
-        np.savez_compressed(output / f"frame-{index:04d}.npz", **frame)
-    np.save(output / "times.npy", times)
+        write_arrays(packed, **frame, source_hash=source_hash)
+        with (output / "times.part").open("wb") as f:
+            np.save(f, times)
+        (output / "times.part").replace(output / "times.npy")
 
 
 if __name__ == "__main__":
@@ -80,5 +108,6 @@ if __name__ == "__main__":
     p.add_argument("converter", type=Path)
     p.add_argument("output", type=Path)
     p.add_argument("animations", nargs="+", type=Path)
+    p.add_argument("--resume", action="store_true")
     args = p.parse_args()
-    cache(args.converter, args.animations, args.output)
+    cache(args.converter, args.animations, args.output, args.resume)

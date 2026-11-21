@@ -1,5 +1,6 @@
 """Render a driver-seat framing study directly from one cached FE state (Blender -b -P)."""
 import argparse
+import json
 from pathlib import Path
 import sys
 
@@ -116,8 +117,8 @@ def mesh_obj(name, xyz, faces, mat):
     return obj
 
 
-def load_car(top, frame, source, shift):
-    mats = materials()
+def load_car(top, frame, source, shift, objects=None, palette=None, only=None):
+    mats = palette or materials()
     xyz = frame["xyz"] * .001
     xyz[:, 0] += shift
     names = dict(zip(source["part_id"], source["part_name"]))
@@ -137,7 +138,7 @@ def load_car(top, frame, source, shift):
     brick_faces = [(0,3,2,1), (4,5,6,7), (0,1,5,4), (1,2,6,5), (2,3,7,6), (3,0,4,7)]
     skip = {2000523, 2000524}  # draw one optical skin of the three co-located windshield plies
     for part, name in names.items():
-        if part in skip:
+        if part in skip or (only is not None and part not in only):
             continue
         sel = (pid == part) & (frame["active"] | (part in rigid))
         poly = []
@@ -164,8 +165,10 @@ def load_car(top, frame, source, shift):
             continue
         idx = np.unique(np.fromiter((n for face in poly for n in face), dtype=np.int32))
         local = dict(zip(idx, range(len(idx))))
-        mesh_obj(str(part) + "_" + name, xyz[idx], [tuple(local[n] for n in f) for f in poly],
+        obj = mesh_obj(str(part) + "_" + name, xyz[idx], [tuple(local[n] for n in f) for f in poly],
                  mats[finish(part, name.lower())])
+        if objects is not None:
+            objects[part] = (obj, idx)
     return xyz
 
 
@@ -216,6 +219,9 @@ def main():
     p.add_argument("source", type=Path)
     p.add_argument("cache", type=Path)
     p.add_argument("output", type=Path)
+    p.add_argument("--shots", type=Path)
+    p.add_argument("--mode", choices=["head","fixed"], default="head")
+    p.add_argument("--sequence", choices=["main","real","stills"], default="stills")
     p.add_argument("--index", type=int, default=0)
     p.add_argument("--approach-m", type=float, default=0)
     p.add_argument("--width", type=int, default=360)
@@ -223,8 +229,21 @@ def main():
     args = p.parse_args(sys.argv[sys.argv.index("--")+1:])
     bpy.ops.wm.read_factory_settings(use_empty=True)
     set_scene()
-    with np.load(args.cache / "mesh.npz") as a, np.load(args.source) as s, np.load(args.cache / f"frame-{args.index:04d}.npz") as f:
-        xyz = load_car(dict(a), dict(f), dict(s), -args.approach_m)
+    pose = None
+    index, shift = args.index, args.approach_m
+    if args.shots:
+        pose = json.loads(args.shots.read_text())[args.mode][args.sequence][index]
+        times = np.load(args.cache / "times.npy")
+        physical = max(0, pose["t_s"])
+        index = max(0, np.searchsorted(times, physical, side="right") - 1)
+        shift = pose["approach_m"]
+    with np.load(args.cache / "mesh.npz") as a, np.load(args.source) as s, np.load(args.cache / f"frame-{index:04d}.npz") as f:
+        frame = dict(f)
+        if pose and physical > times[index] and index+1 < len(times):
+            with np.load(args.cache / f"frame-{index+1:04d}.npz") as following:
+                blend = (physical-times[index])/(times[index+1]-times[index])
+                frame["xyz"] = frame["xyz"]*(1-blend) + following["xyz"]*blend
+        xyz = load_car(dict(a), frame, dict(s), -shift)
         ix = {int(n): j for j,n in enumerate(a["node_id"]) if 5000511 <= n <= 5000518}
     # The original crossmember sensor has local +x forward and +y left.
     origin = Vector(xyz[ix[5000514]])
@@ -236,6 +255,10 @@ def main():
     bpy.ops.object.camera_add(location=eye)
     cam = bpy.context.object
     cam.rotation_euler = (x - .09*y - .10*z).to_track_quat("-Z","Y").to_euler()
+    if pose:
+        cam.location = pose["eye_m"]
+        cam.rotation_mode = "QUATERNION"
+        cam.rotation_quaternion = pose["quaternion_wxyz"]
     cam.data.sensor_fit, cam.data.sensor_height, cam.data.lens = "VERTICAL", 32, 19
     cam.data.clip_start = .015
     scene = bpy.context.scene

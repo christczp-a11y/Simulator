@@ -60,7 +60,7 @@ const Footage: React.FC<{f: number; base: string}> = ({f, base}) => {
 
 const label: React.CSSProperties = {fontFamily: TEXT, fontWeight: 800, letterSpacing: '-0.02em', color: PAPER, lineHeight: 1};
 
-const Stat: React.FC<{name: string; value: string; unit?: string; hot?: boolean; s: number}> = ({name, value, unit, hot, s}) => (
+export const Stat: React.FC<{name: string; value: string; unit?: string; hot?: boolean; s: number}> = ({name, value, unit, hot, s}) => (
 	<div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
 		<div style={{...label, fontSize: 36 * s, opacity: 0.9, whiteSpace: 'nowrap'}}>{name}</div>
 		<div style={{display: 'flex', alignItems: 'baseline', gap: 6 * s, marginTop: 8, height: 116 * s}}>
@@ -118,15 +118,15 @@ const Freeze: React.FC<{k: number; s: number; top: number}> = ({k, s, top}) => (
 	</AbsoluteFill>
 );
 
-const End: React.FC<{k: number}> = ({k}) => {
+export const End: React.FC<{k: number; numberText?: string; caption?: string}> = ({k, numberText = '0.032', caption = 'seconds. that was all.'}) => {
 	const pop = back(k / 9);
 	return (
 		<AbsoluteFill style={{background: INK}}>
 			<Img src={staticFile('ht_end.png')} style={{...full, transform: `scale(${1.5 - 0.45 * ease(k / 9) + k * 0.0006})`, opacity: clamp(k / 3)}} />
 			<Img src={staticFile('ht_burst.png')} style={{...full, transform: `scale(${0.4 + 2.6 * ease(k / 8)})`, opacity: clamp(1.2 - k / 7)}} />
 			<div style={{position: 'absolute', left: 0, top: 610, width: 1080, textAlign: 'center', opacity: clamp((k - 10) / 5)}}>
-				<FlipClock values={['0.032', '0.032']} h={132} />
-				<div style={{...label, fontSize: 46, marginTop: 24}}>seconds. that was all.</div>
+				<FlipClock values={[numberText, numberText]} h={132} />
+				<div style={{...label, fontSize: 46, marginTop: 24}}>{caption}</div>
 			</div>
 			<div style={{position: 'absolute', left: 0, top: 930, width: 1080, textAlign: 'center', transform: `scale(${pop})`}}>
 				<div style={{...label, fontSize: 212, letterSpacing: '-0.05em', textShadow: `0 0 40px ${INK}, 0 0 14px ${INK}`}}>subscribe</div>

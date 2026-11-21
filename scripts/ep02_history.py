@@ -21,7 +21,9 @@ def extract(path):
             columns[short] = headers.index(name)
         for label, family, item, channels in [
             ("seat", "DATABASE_HISTORY_NODE", 5000513, ("AX", "AY", "AZ", "VX")),
-            ("cg", "DATABASE_HISTORY_NODE", 5000404, ("VX",)),
+            ("cg", "DATABASE_HISTORY_NODE", 5000404, ("VX", "VY", "VZ")),
+            ("rear_left", "DATABASE_HISTORY_NODE", 5000390, ("AX",)),
+            ("rear_right", "DATABASE_HISTORY_NODE", 5000398, ("AX",)),
             ("left", "DATABASE_HISTORY_NODE", 5000554, ("AX",)),
             ("right", "DATABASE_HISTORY_NODE", 2274453, ("AX",)),
             ("wall1", "TH-RWALL", 10000001, ("FNX",)),
@@ -48,6 +50,7 @@ def derived(d, complete):
     energy = sum(d[k] for k in ("internal_Nmm", "kinetic_Nmm", "rotation_Nmm", "contact_Nmm", "hourglass_Nmm"))
     d["energy_residual_pct"] = 100 * (energy - energy[0] - (d["external_Nmm"] - d["external_Nmm"][0])) / energy[0]
     d["cg_speed_kmh"] = d["cg_VX"] * 0.0036
+    d["cg_resultant_kmh"] = np.sqrt(sum(d["cg_"+v]**2 for v in ("VX","VY","VZ"))) * 0.0036
     if complete:
         if not len(hits) or t[-1] - t[hits[0]] < 0.1:
             raise ValueError("A short benchmark cannot validate the crash pulse.")
@@ -58,7 +61,7 @@ def derived(d, complete):
         if np.max(np.diff(t)) > 0.00011 or fs < 9950:
             raise ValueError("Node output too sparse for the 10 kHz analysis.")
         sos = butter(2, 2.0775 * 60, fs=fs, output="sos")
-        for loc in ("seat", "left", "right"):
+        for loc in ("seat", "left", "right", "rear_left", "rear_right"):
             a = np.interp(grid, t, d[f"{loc}_AX"]) / -9806.65
             # Constant endpoint extension absorbs the filter transient without
             # introducing a mirrored impact before the start of the simulation.
