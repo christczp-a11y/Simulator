@@ -28,10 +28,12 @@ def comparison(head, fixed, dest, width):
                f"drawtext=text='Head response':x=16:{style},"
                f"drawtext=text='Body-mounted':x={width+16}:{style},"
                "loop=loop=2:size=18:start=0,setpts=N/(30*TB),format=yuv420p")
+    font_cache=WORK/"font-cache"
+    font_cache.mkdir(parents=True,exist_ok=True)
     subprocess.run(["ffmpeg", "-v", "error", "-nostdin", "-y", "-framerate", "30",
                     "-i", head/"%04d.png", "-framerate", "30", "-i", fixed/"%04d.png",
                     "-filter_complex", filters, "-c:v", "libx264", "-crf", "17",
-                    "-movflags", "+faststart", dest], check=True)
+                    "-movflags", "+faststart", dest], check=True,env=os.environ|{"XDG_CACHE_HOME":str(font_cache)})
     subprocess.run(["ffmpeg","-v","error","-xerror","-i",dest,"-f","null","-"],check=True)
 
 
@@ -100,7 +102,7 @@ def main():
         return
     dest.mkdir(parents=True,exist_ok=True)
     prefix=f"{args.speed}kmh"
-    script("ep02_camera_review.py",shots,dest,"--prefix",prefix)
+    script("ep02_camera_review.py",shots,dest,"--prefix",prefix,"--cache",args.cache)
     shutil.copyfile(clearance,dest/f"{prefix}-clearance.csv")
     for mode in ("head","fixed"):
         folder=proof/mode/"stills"
