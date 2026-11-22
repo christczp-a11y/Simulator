@@ -81,7 +81,7 @@ def sample_plan(history, landmarks):
                     # evaluated on the physical-time trajectory before rendering.
                     offsets=((np.arange(5)+.5)/5-.5)/(2*FPS)
                     shutter=at_times(np.minimum(physical[i]+offsets,trim_end),mode)
-                    pose["shutter"]=[{k:s[k] for k in ("t_s","eye_m","quaternion_wxyz","approach_m")} for s in shutter]
+                    pose["shutter"]=[{k:s[k] for k in ("t_s","eye_m","quaternion_wxyz","approach_m","speed_kmh")} for s in shutter]
                 if name == "main" and 1 <= ft[i] < contact_film:
                     pose["slow"]=float(1/(1-(1-1/30)*(3*u[i]**2-2*u[i]**3)))
                 else:

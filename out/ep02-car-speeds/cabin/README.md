@@ -4,6 +4,8 @@
 
 [同机位改模前后](driver-comparison.jpg) · [驾驶位原图](driver.jpg) · [从副驾驶看方向盘](passenger.jpg) · [全舱](overview.jpg) · [方向盘近景](wheel.jpg) · [中控近景](controls.jpg)
 
+[56 km/h 变形工程与六组双机位图](motion/)
+
 ## 打开或重建
 
 本次云端工作区中的场景保存在 `work/cabin-model/ep02-cabin.blend`。可在 Blender 中单独选择仪表、面板、拨杆、门内饰和灯光，五台检查相机已经保存。F12 使用 Cycles 渲染当前相机。
@@ -26,4 +28,4 @@ bash scripts/build_ep02_cabin.sh --width 1500 --samples 40
 
 两个有限元版本对应同一辆四门手动挡轿车。旧粗网格上仪表台有 2,760 个壳单元，精细版有 10,197 个。原方向盘为 770 和 2,756 个。两种网格都包含承力支架，因此建模时另外处理了可见表皮。饰件的轮廓、字样和表面颜色属于可编辑的近似重建，尚缺这辆样车的整舱纹理扫描。可见结构的布置还参照了 IIHS 同代美规四门车实拍。[CCSA 模型页](https://www.ccsa.gmu.edu/models/2010-toyota-yaris/) · [IIHS 车辆照片](https://www.iihs.org/ratings/vehicle/toyota/yaris-4-door-sedan/2010)
 
-当前模型处于未变形状态。原 v1l 碰撞数据单独保留，高精度饰件还未绑定到碰撞历程。原包及含车型网格的 Blender 场景保存在忽略版本控制的工作目录。感谢乔治梅森大学 CCSA 和 FHWA。[CCSA v2j 官方原包](https://media.ccsa.gmu.edu/model/2010-toyota-yaris-detailed-v2j.zip)
+本页五张静帧取自未变形工程。另有按 v1l 节点运动驱动的 0–140 ms 检查工程。[变形绑定和时间轴](motion/)原包及含车型网格的 Blender 场景保存在忽略版本控制的工作目录。感谢乔治梅森大学 CCSA 和 FHWA。[CCSA v2j 官方原包](https://media.ccsa.gmu.edu/model/2010-toyota-yaris-detailed-v2j.zip)

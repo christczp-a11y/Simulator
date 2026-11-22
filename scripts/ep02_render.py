@@ -39,11 +39,13 @@ def comparison(head, fixed, dest, width):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("target", choices=["proof","film"])
+    p.add_argument("target", choices=["stills","proof","film"])
     p.add_argument("speed", type=int)
     p.add_argument("history", type=Path, help="Merged, CFC-filtered solver history")
     p.add_argument("cache", type=Path)
     p.add_argument("--source", type=Path, default=WORK/"car.npz")
+    p.add_argument("--cabin",type=Path,help="Transfer the solved shell motion to this editable v2j cabin")
+    p.add_argument("--review-dir",type=Path,default=OUT/"stills",help="Destination of inspection views and measurements")
     p.add_argument("--picture-root",type=Path,default=WORK/"picture")
     p.add_argument("--blender", type=Path, default=WORK/"blender-4.5.16-linux-x64/blender")
     p.add_argument("--width", type=int)
@@ -51,8 +53,8 @@ def main():
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--gpu", action="store_true")
     args = p.parse_args()
-    width = args.width or (360 if args.target=="proof" else 1080)
-    samples = args.samples or (8 if args.target=="proof" else 32)
+    width = args.width or (1080 if args.target=="film" else 360)
+    samples = args.samples or (32 if args.target=="film" else 8)
     if width <= 0 or round(width*16/9)%2 or samples < 1 or args.threads < 1:
         p.error("Specify a positive resolution with an even height, samples and thread count.")
     case = args.picture_root/str(args.speed)
@@ -68,14 +70,17 @@ def main():
     proof = case/"proof"
     # Resume only a render whose inputs and quality settings match exactly.
     digest=hashlib.sha256(shots.read_bytes())
-    for path in (args.source,SCRIPTS/"ep02_still.py",SCRIPTS/"ep02_sequence.py"):
+    inputs=[args.source,SCRIPTS/"ep02_still.py",SCRIPTS/"ep02_sequence.py"]
+    if args.cabin:
+        inputs.extend([args.cabin,SCRIPTS/"ep02_cabin_motion.py"])
+    for path in inputs:
         with path.open("rb") as f:
             digest.update(hashlib.file_digest(f,"sha256").digest())
     for path in sorted(args.cache.glob("frame-*.npz")):
         with np.load(path) as frame:
             digest.update(str(frame["source_hash"]).encode())
     key=digest.hexdigest()
-    dest = OUT/"stills"
+    dest = args.review_dir
     def render(mode, seq, folder, save_scene=False):
         folder.mkdir(parents=True, exist_ok=True)
         signature = dict(shots=key, width=width, samples=samples, mode=mode, sequence=seq)
@@ -84,6 +89,11 @@ def main():
             raise ValueError(f"Render settings changed. Use a fresh image directory for {folder}.")
         stamp.write_text(json.dumps(signature))
         indices = [str(i) for i in range(len(plan[mode][seq])) if not (folder/f"{i:04d}.png").is_file()]
+        snapshot = case/("driver-60ms.blend" if args.cabin else "driver-seat.blend")
+        if save_scene and not snapshot.exists():
+            needed="4" if args.cabin else "0"
+            if needed not in indices:
+                indices.append(needed)
         if not indices:
             return
         cmd = [args.blender, "-b","-t",str(args.threads),"--python-exit-code","1","-P",
@@ -91,8 +101,10 @@ def main():
                "--mode",mode,"--sequence",seq,"--width",str(width),"--samples",str(samples),"--frames",*indices]
         if args.gpu:
             cmd.append("--gpu")
+        if args.cabin:
+            cmd.extend(["--cabin",args.cabin])
         if save_scene:
-            cmd.extend(["--save-scene",case/"driver-seat.blend"])
+            cmd.extend(["--save-scene",snapshot,"--save-index","4" if args.cabin else "0"])
         with (folder/"blender.log").open("a") as log:
             subprocess.run(cmd, check=True, stdout=log,stderr=subprocess.STDOUT,
                            env=os.environ|{"BLENDER_USER_RESOURCES":str(WORK/"blender-user")})
@@ -109,8 +121,10 @@ def main():
         render(mode,"stills",folder,save_scene=mode=="head")
         for i,name in enumerate(STILL_NAMES):
             shutil.copyfile(folder/f"{i:04d}.png",dest/f"{prefix}-{mode}-{name}.png")
-        render(mode,"real",proof/mode/"real")
-    comparison(proof/"head/real",proof/"fixed/real",dest/f"{prefix}-camera-comparison.mp4",width)
+        if args.target=="proof":
+            render(mode,"real",proof/mode/"real")
+    if args.target=="proof":
+        comparison(proof/"head/real",proof/"fixed/real",dest/f"{prefix}-camera-comparison.mp4",width)
 
 
 if __name__=="__main__":

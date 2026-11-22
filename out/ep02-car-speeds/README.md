@@ -1,6 +1,8 @@
 # 第二集交付状态
 
-当前交付是可编辑的驾驶舱静态模型。驾驶位和仪表台采用同款车的 CCSA 精细版 v2j 作为几何依据。驾驶舱饰件、参考来源、静帧和本机重建命令见[模型说明](cabin/README.md)。
+驾驶舱已有可编辑的静态模型和 281 帧的变形检查工程。[六组双机位图与工程说明](cabin/motion/)
+
+驾驶位和仪表台采用同款车的 CCSA 精细版 v2j 作为几何依据。驾驶舱饰件、参考来源、静帧和本机重建命令见[模型说明](cabin/README.md)。
 
 56 km/h 粗网格工况已算完 140 ms。驾驶座 CFC 60 峰值为 60.66 g，碰墙后 47.30 ms 到峰，最大能量残差为 6.42%。能量超过验收线，其他速度待物理复核。[分段数据](physics/56kmh-checkpoints.csv) · [工具版本与恢复步骤](../../PROGRESS.md)
 
@@ -29,16 +31,16 @@
 
 ## 从已验收的物理解算生成画面
 
-在仓库根目录运行。输入为正式工况的逐帧缓存、原模型零件表及 10 kHz 历程。工作目录内生成的 `driver-seat.blend` 含原模型几何，保留在本机。
+在仓库根目录运行。输入为正式工况的逐帧缓存、原模型零件表及 10 kHz 历程。工作目录内生成的 `driver-seat.blend` 含原模型几何，保留在本机。启用精细驾驶舱后，检查工程名为 `driver-60ms.blend`。
 
 ```bash
-python3 scripts/ep02_render.py proof 56 out/ep02-car-speeds/physics/56kmh-history.csv work/cached56
+python3 scripts/ep02_render.py proof 56 out/ep02-car-speeds/physics/56kmh-history.csv work/cached56 --cabin work/cabin-model/ep02-cabin.blend
 ```
 
 这条命令生成两套各六张静帧、实速并排回放、相机朝向表、角速度图及间距表。实速对照同步播放三次，左侧是头部响应，右侧固定在座椅横梁。合适的 GPU 可加 `--gpu`。正式素材使用 `film`、1080×1920、Cycles 降噪，按每档已完成的工况执行。以下命令展示单档流程，多档合成时在 `ep02_picture.py` 命令末尾依次列出已渲染的速度。
 
 ```bash
-python3 scripts/ep02_render.py film 56 out/ep02-car-speeds/physics/56kmh-history.csv work/cached56 --gpu
+python3 scripts/ep02_render.py film 56 out/ep02-car-speeds/physics/56kmh-history.csv work/cached56 --cabin work/cabin-model/ep02-cabin.blend --gpu
 python3 scripts/ep02_picture.py work/picture work/picture/film.json 56
 node remotion/render-car.mjs work/picture/film.json work/picture out/ep02-car-speeds/ep02-silent.mp4
 python3 scripts/ep02_sound.py mix work/picture/film.json work/picture/mix.wav out/ep02-car-speeds/sound-cues.csv

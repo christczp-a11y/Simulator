@@ -1,6 +1,6 @@
 # EP02 制作进度
 
-**可编辑的静态驾驶舱已完成，五个机位均已出图。** [同机位改模前后](out/ep02-car-speeds/cabin/driver-comparison.jpg) · [图库与重建方法](out/ep02-car-speeds/cabin/README.md)
+**驾驶舱已完成静态建模和 56 km/h 变形绑定，281 个求解样本可在 Blender 中逐帧检查。** [六组双机位对照](out/ep02-car-speeds/cabin/motion/) · [同机位改模前后](out/ep02-car-speeds/cabin/driver-comparison.jpg) · [图库与重建方法](out/ep02-car-speeds/cabin/README.md)
 
 56 km/h 粗网格已算完 140 ms，最大能量残差 6.42%，超过 5% 验收线。其余速度和视频合成暂停。
 
@@ -90,3 +90,7 @@ export LD_LIBRARY_PATH="$OPENRADIOSS_PATH/extlib/hm_reader/linux64:$OPENRADIOSS_
 已核对 mm、s、t 单位和两个 x=50 mm 的有限壁面，壁面摩擦系数均为 0.6。自接触转换后的系数为 0.1 + 0.1 exp(−0.001 v)，与原输入的静摩擦 0.2、动摩擦 0.1 和衰减 0.001 相符。末帧接触能为 14.204 kJ，其中摩擦为 13.122 kJ。计入四个地面和两个正面壁障后，纵向冲量与全局动量变化的差额为 1.49 N·s，相对正面壁障冲量约 0.0063%。这些结果排除了简单的漏加纵向反力和摩擦常数误读，尚不能把能量增量归因于某一个接触或材料。保持原参数。[复算数据](out/ep02-car-speeds/physics/56kmh-energy-audit.json)
 
 CCSA 验证报告第 18 页还给出了同款四门轿车的整墙反力。按图每 1 ms 读取一次，5677 实车的主峰约 530 kN / 26 ms，CCSA 原版 LS-DYNA 的主峰约 594 kN / 43 ms。本次两段前壁反力之和经 CFC 60 滤波为 624 kN / 44.6 ms。原版有限元的晚峰在移植前就已存在，移植工况的晚峰又高约 30 kN。原图时间取自图轴，本次以首次采到正面墙力为零。报告未在图上给出滤波参数，逐点数据为近似读图，不能当作原始仪器记录。[整墙反力对照图](out/ep02-car-speeds/physics/56kmh-wall-reference.png) · [读图数据](out/ep02-car-speeds/physics/56kmh-wall-reference.csv)
+
+### 驾驶舱运动绑定
+
+已将 474 个精细版壳零件与 448 个外观饰件绑定到 v1l 的原生节点运动。重开 Blender 并校准 PC2 的起始帧后，从首帧到第 281 帧抽查了六个时刻，五个零件在这些帧中与烘焙坐标逐点一致，风挡也按求解状态隐去了细面。完整工程在 `work/cabin-motion/timeline/`。另有头部与固定机位各六张诊断静帧。该工况的方向盘中心到靠背间距最多缩短 8.64 cm。饰件运动是基于同零件支承的重建。[双机位静帧、工况限制与测量](out/ep02-car-speeds/cabin/motion/)
