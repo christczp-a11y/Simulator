@@ -34,10 +34,21 @@ def extract(path):
                 if len(matches) != 1:
                     raise ValueError(f"Expected exactly one {label}/{channel}. Convert with the original T01_TITLES beside the T01.")
                 columns[f"{label}_{channel}"] = matches[0]
-        data = np.asarray([[float(row[i]) for i in columns.values()] for row in reader])
+        # In QEPH shells the per-part HE also includes numerical damping.
+        # The global HOURGLASS ENERGY excludes that damping. Keep both.
+        he=[i for i,h in enumerate(headers) if h.endswith(" HE") and i>0
+            and headers[i-1]==h[:-3]+" MASS"]
+        samples=[]
+        for row in reader:
+            values=[float(row[i]) for i in columns.values()]
+            if he:
+                values.append(sum(float(row[i]) for i in he))
+            samples.append(values)
+        data=np.asarray(samples)
     if data.ndim != 2 or len(data) < 2 or not np.all(np.isfinite(data)):
         raise ValueError("Missing or non-finite time history.")
-    return dict(zip(columns, data.T))
+    fields=list(columns)+(["part_HE_with_damping_Nmm"] if he else [])
+    return dict(zip(fields, data.T))
 
 
 def derived(d, complete):

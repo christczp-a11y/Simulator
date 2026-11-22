@@ -10,6 +10,7 @@
   "max_hourglass_internal_pct": 0.0,
   "sample_count": 1400,
   "max_sample_gap_us": 100.60000000000625,
+  "max_part_HE_including_damping_over_global_internal_pct": 5.550899813884763,
   "rear_seat_peaks": {
     "left": {
       "peak_g": 59.06772045940417,

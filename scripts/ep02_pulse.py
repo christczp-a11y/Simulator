@@ -87,6 +87,9 @@ def main():
                    max_energy_residual_pct=float(np.max(np.abs(d["energy_residual_pct"]))),
                    max_hourglass_internal_pct=float(np.max(np.abs(ratio))),
                    sample_count=len(t), max_sample_gap_us=float(np.diff(t).max()*1e6))
+    if "part_HE_with_damping_Nmm" in d:
+        stabilization=100*d["part_HE_with_damping_Nmm"][valid_ie]/d["internal_Nmm"][valid_ie]
+        summary["max_part_HE_including_damping_over_global_internal_pct"]=float(np.max(np.abs(stabilization)))
     after_contact=np.flatnonzero(tc>=0)
     summary["rear_seat_peaks"]={}
     for side in ("left","right"):
@@ -112,6 +115,8 @@ def main():
     ax[0].legend(fontsize=8,frameon=False)
     ax[1].plot(tc*1000,d["energy_residual_pct"],label="Energy balance residual / initial energy")
     ax[1].plot(tc[valid_ie]*1000,ratio,label="Hourglass / internal energy")
+    if "part_HE_with_damping_Nmm" in d:
+        ax[1].plot(tc[valid_ie]*1000,stabilization,label="Part HE incl. stabilisation / internal energy",lw=1)
     ax[1].set(xlabel="Time since first recorded barrier force (ms)",ylabel="Percent")
     ax[1].legend(fontsize=8,frameon=False)
     for a in ax:
