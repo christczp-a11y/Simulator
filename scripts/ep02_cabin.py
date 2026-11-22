@@ -398,16 +398,29 @@ def centre_fascia(mats):
         for z in zvals:
             x,y,_=surface(side,z,2.6)
             for u in np.linspace(0,1,17):
-                reach=np.interp(z,[583,690,810,930,966],[25,32,60,71,57])
+                # Reach under the original upper dash on both sides. Its
+                # aperture extends past y=-220 mm on the passenger side.
+                reach=np.interp(z,[583,690,810,930,966],[36,54,113,125,113])
                 pts.append([x+50*u*u+7*u,y-side*reach*u,z-4*sin(pi*u)])
         n=17
         faces=[(j*n+i,j*n+i+1,(j+1)*n+i+1,(j+1)*n+i) for j in range(len(zvals)-1) for i in range(n-1)]
         t.add("Wrapped console side cheek",pts,faces,"upper",True)
+        # Close the upper edge beneath the overhanging meter brow. Continue
+        # the front profile towards the windscreen until it enters the dash.
+        edge=np.array(pts[-n:])
+        cap=[]
+        for v in np.linspace(0,1,18):
+            for i,p0 in enumerate(edge):
+                u=i/(n-1)
+                cap.append(p0+[153*v,-side*12*v,(14-5*u)*np.sin(v*pi/2)])
+        t.add("Continuous shoulder below instrument brow",cap,
+              [(j*n+i,j*n+i+1,(j+1)*n+i+1,(j+1)*n+i) for j in range(17) for i in range(n-1)],"upper",True)
     pts=[]
     for j in range(15):
         u=j/14
         for v in np.linspace(-1,1,61):
-            pts.append([-1362+145*u+8*v*v,-16+v*(147+28*u),964+7*u-6*v*v])
+            pts.append([-1362+155*u+8*v*v,-16+v*(147+40*u),
+                        966+11*np.sin(.5*pi*u)**.65-1.5*v*v])
     t.add("Meter lower shelf",pts,[(j*61+i,j*61+i+1,(j+1)*61+i+1,(j+1)*61+i) for j in range(14) for i in range(60)],"upper",True)
     panel("Heater switch panel",np.linspace(610,804,45),np.linspace(-.89,.89,35),3.7,"upper")
     # A small driver's hazard key sits between the two centre registers.
