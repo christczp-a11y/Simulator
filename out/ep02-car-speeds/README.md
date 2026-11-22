@@ -46,3 +46,5 @@ python3 scripts/ep02_master.py work/picture/film.json out/ep02-car-speeds/ep02-s
 ```
 
 独立读取求解器写出的总能量通道，最大漂移 6.41968%。末帧有 13.122 kJ 摩擦接触能，前壁和四个地面的纵向总冲量与动量变化相差 1.49 N·s。重启段终端的 ERROR 采用另一个公式，不能替代全程验收。[能量与冲量复算](physics/56kmh-energy-audit.json)
+
+同款轿车 5677 实车壁障力的峰值按 CCSA 图约 530 kN / 26 ms。原作者有限元按图约 594 kN / 43 ms，本次两段前壁合力经 CFC 60 后为 624 kN / 44.6 ms。[同车型整墙反力对照](physics/56kmh-wall-reference.png)
