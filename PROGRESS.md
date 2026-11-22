@@ -82,3 +82,9 @@ export LD_LIBRARY_PATH="$OPENRADIOSS_PATH/extlib/hm_reader/linux64:$OPENRADIOSS_
 - 展示场景保留 474 个相关原壳件和零件编号。方向盘包覆、喇叭盖、仪表、中控面板及叶片、门板外皮、手排饰件、脚舱和顶棚均可在 Blender 内单独编辑。制作中用三个机位抽查了仪表台及以下的首个可见表面，修复了旧模型里从脚舱看到路面、轮辋和清洗液壶的开口。[副驾驶方向的静态近景](out/ep02-car-speeds/cabin/passenger.jpg)
 - 工程位于 `work/cabin-model/ep02-cabin.blend`。模型的重建脚本和静帧随分支交付。命令为 `bash scripts/build_ep02_cabin.sh --width 1500 --samples 40`。驾驶舱展示采用未变形状态，饰件暂未绑定到粗网格求解历程。
 - 中控两侧已延伸至原仪表台下方，补齐上沿和仪表罩接缝。已检查五张最终静帧，驾驶位为 1080×1920，中控为 1500×1275，副驾驶、方向盘和全舱为 1500×1020。独立 Blender 进程重开工程，读取到 5 台相机和 29 组共 448 个饰件对象，外部资源缺失数为 0。已实测移动和还原方向盘包覆件的网格顶点，并从重开的工程渲出驾驶位小样。[最终图库](out/ep02-car-speeds/cabin/)
+
+### 56 km/h 总能量独立复核
+
+逐段读取全部 1,400 个原生历程样本。此版本转换器将全局第 23 通道标为 `NO NAME`。按对应版本 Engine 的写出公式，复算值与该直接通道最大只差 0.11 J。初始为 156.877 kJ，末帧为 166.932 kJ，最大漂移 6.41968%，出现在仿真起点后 108.600 ms。各重启段终端打印的 ERROR 范围为 −1.8% 到 +0.1%，该公式的分子不含接触能，且每次启动采用本段初值。完整时间历程仍超出 5% 验收线。[原生能量写出](https://github.com/OpenCourant/OpenCourant/blob/cb760c206e346eff12161a2268b134ef9d48a4ef/engine/source/output/th/hist2.F#L315) · [终端 ERROR 公式](https://github.com/OpenCourant/OpenCourant/blob/cb760c206e346eff12161a2268b134ef9d48a4ef/engine/source/output/ecrit.F#L499)
+
+已核对 mm、s、t 单位和两个 x=50 mm 的有限壁面，壁面摩擦系数均为 0.6。自接触转换后的系数为 0.1 + 0.1 exp(−0.001 v)，与原输入的静摩擦 0.2、动摩擦 0.1 和衰减 0.001 相符。末帧接触能为 14.204 kJ，其中摩擦为 13.122 kJ。计入四个地面和两个正面壁障后，纵向冲量与全局动量变化的差额为 1.49 N·s，相对正面壁障冲量约 0.0063%。这些结果排除了简单的漏加纵向反力和摩擦常数误读，尚不能把能量增量归因于某一个接触或材料。保持原参数。[复算数据](out/ep02-car-speeds/physics/56kmh-energy-audit.json)

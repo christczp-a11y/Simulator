@@ -44,3 +44,5 @@ node remotion/render-car.mjs work/picture/film.json work/picture out/ep02-car-sp
 python3 scripts/ep02_sound.py mix work/picture/film.json work/picture/mix.wav out/ep02-car-speeds/sound-cues.csv
 python3 scripts/ep02_master.py work/picture/film.json out/ep02-car-speeds/ep02-silent.mp4 work/picture/mix.wav out/ep02-car-speeds/ep02.mp4 out/ep02-car-speeds/qa.json
 ```
+
+独立读取求解器写出的总能量通道，最大漂移 6.41968%。末帧有 13.122 kJ 摩擦接触能，前壁和四个地面的纵向总冲量与动量变化相差 1.49 N·s。重启段终端的 ERROR 采用另一个公式，不能替代全程验收。[能量与冲量复算](physics/56kmh-energy-audit.json)
