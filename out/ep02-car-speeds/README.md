@@ -21,6 +21,16 @@
 
 已测量 32 条现有 ElevenLabs 片段的全频与 300 Hz 以上电平。第二集专用的车内行驶、金属压溃、玻璃碎裂和零件落地声仍缺。现有金属及玻璃片段可剪用，行驶声和落地声留空。成片的时间表、响度和手机频段电平差须用最终剪辑实测。[素材电平表](asset-levels.csv)
 
+## 56 km/h 复核
+
+独立读取求解器写出的总能量通道，最大漂移 6.41968%。末帧有 13.122 kJ 摩擦接触能，前壁和四个地面的纵向总冲量与动量变化相差 1.49 N·s。重启段终端的 ERROR 采用另一个公式，不能替代全程验收。[能量与冲量复算](physics/56kmh-energy-audit.json)
+
+同款轿车 5677 实车壁障力的峰值按 CCSA 图约 530 kN / 26 ms。原作者有限元按图约 594 kN / 43 ms，本次两段前壁合力经 CFC 60 后为 624 kN / 44.6 ms。[同车型整墙反力对照](physics/56kmh-wall-reference.png)
+
+用同一个 45 ms 重启文件将积分步长从约 0.996 µs 限至 0.498 µs，算到 55 ms。最后一个共同采样时刻为 54.900 ms，原步长漂移 5.136%，半步长漂移 5.441%。这两条曲线都超过 5%。TYPE25 接触的罚刚度项也依赖步长，此试验衡量整套计算对步长设置的敏感性。[步长对照图](physics/56kmh-step-study.png) · [逐点数据](physics/56kmh-step-study.csv)
+
+原包的内部接触卡控制 14 个零件。三次 Starter 对照确认这 14 个实体属性的畸变控制已启用。以八个几何高斯点检查 281 个输出状态，3,848 个相关砖单元的最小局部体积比为 0.523，没有观察到翻转。能量残差的来源仍未定位到具体零件或界面。原包仅含输入卡和说明，校方验证报告给出的曲线没有各零件及界面逐时能量明细。[实体检查](physics/56kmh-interior-contact.json)
+
 ## 模型来源与使用说明
 
 采用乔治梅森大学 CCSA 的 2010 Yaris 粗网格 v1l（2016-12），以及原包内配套的 NCAP 刚性墙。原包 README 记载项目由 FHWA 资助，要求使用者自行验证结果，CCSA 和 FHWA 对有效性、准确性及适用性不承担责任，并请求在使用模型的论文与出版物中致谢 GMU CCSA 和 FHWA。未将原包或提取的几何写入 Git。[原始下载](https://media.ccsa.gmu.edu/model/2010-toyota-yaris-coarse-v1l.zip)
@@ -46,7 +56,3 @@ node remotion/render-car.mjs work/picture/film.json work/picture out/ep02-car-sp
 python3 scripts/ep02_sound.py mix work/picture/film.json work/picture/mix.wav out/ep02-car-speeds/sound-cues.csv
 python3 scripts/ep02_master.py work/picture/film.json out/ep02-car-speeds/ep02-silent.mp4 work/picture/mix.wav out/ep02-car-speeds/ep02.mp4 out/ep02-car-speeds/qa.json
 ```
-
-独立读取求解器写出的总能量通道，最大漂移 6.41968%。末帧有 13.122 kJ 摩擦接触能，前壁和四个地面的纵向总冲量与动量变化相差 1.49 N·s。重启段终端的 ERROR 采用另一个公式，不能替代全程验收。[能量与冲量复算](physics/56kmh-energy-audit.json)
-
-同款轿车 5677 实车壁障力的峰值按 CCSA 图约 530 kN / 26 ms。原作者有限元按图约 594 kN / 43 ms，本次两段前壁合力经 CFC 60 后为 624 kN / 44.6 ms。[同车型整墙反力对照](physics/56kmh-wall-reference.png)
