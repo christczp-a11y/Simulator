@@ -10,8 +10,8 @@ Bodies
   * Train 134 lead locomotive: rigid body (MAT_RIGID) built from boxes; front at Y=+150, moving -Y.
     Effective mass 200 t (loco + share of trailing train). Initial speed V_KMH (illustrative:
     real speed not published).
-  * Ground: coach underframe slides on a rigid wall at Z=900 (stands in for the bogies), loco trucks
-    on a rigid wall at Z=0.  Gravity on.  Automatic single-surface contact for everything.
+  * Ground: coach underframe slides on a rigid wall at Z=900 (stands in for the bogies); the loco
+    is held on the track by MAT_RIGID constraints (only Y translation free).  Gravity on.  Automatic single-surface contact for everything.
 Run:  starter -i el_ayyat.k   (OpenRadioss writes el_ayyat_0001.rad, then run the engine on it)."""
 import math, json, sys
 V_KMH = float(sys.argv[1]) if len(sys.argv) > 1 else 60.0
@@ -94,7 +94,7 @@ for x in range(-HW, HW, 50):
         if len(ins) == 4: Q(5, *[N(px, 0, pz, 'c') for px, pz in c])
         elif len(ins) == 3: Q(5, *[N(px, 0, pz, 'c') for px, pz in ins])
 # ---------------- locomotive (rigid) ----------------
-Y0L = 150.0
+Y0L = 300.0                                    # pilot box starts at Y0L-150 -> loco front at Y=+150
 def lbox(x0, x1, y0, y1, z0, z1, h=100):
     """six faces of a box, 100 mm mesh, nodes private to the loco body"""
     def rng(a, b):
@@ -159,7 +159,7 @@ w(f'{0.0:10.1f}{0.0:10.1f}{0:10d}{0:10d}{0.0:10.1f}')
 w(''.ljust(80)); w(''.ljust(80))
 w('*MAT_RIGID_TITLE'); w('locomotive')
 w(f'{9:10d}{RHO_LOCO:10.4e}{210.0:10.1f}{0.3:10.2f}{0.0:10.1f}{0.0:10.1f}{0.0:10.1f}{0.0:10.1f}')
-w(f'{0.0:10.1f}{0:10d}{0:10d}'); w(''.ljust(80))
+w(f'{1.0:10.1f}{6:10d}{7:10d}'); w(''.ljust(80))   # CMO=1: global constraints, CON1=6 fix x,z; CON2=7 fix rotations (rigid-wall support is dropped for rigid-body nodes)
 w('*HOURGLASS'); w(f'{1:10d}{4:10d}{0.05:10.3f}')
 for pid, (title, t, mid) in PARTS.items():
     w('*SECTION_SHELL'); w(f'{pid:10d}{2:10d}{1.0:10.2f}{5 if mid != 9 else 2:10d}{1.0:10.2f}{0:10d}{0:10d}{1:10d}')
@@ -176,12 +176,10 @@ def nset(sid, ids):
     w('*SET_NODE_LIST'); w(f'{sid:10d}')
     for i in range(0, len(ids), 8): w(''.join(f'{v:10d}' for v in ids[i:i + 8]))
 coach_bottom = [n for n, (x, y, z, b) in nodes.items() if b == 'c' and z <= ZU + 0.1]
-loco_bottom = [n for n, (x, y, z, b) in nodes.items() if b == 'l' and z <= 0.1]
-nset(1, coach_bottom); nset(2, loco_bottom)
+nset(1, coach_bottom)
 w('*RIGIDWALL_PLANAR'); w(f'{1:10d}{0:10d}{0:10d}{0.0:10.1f}')
 w(f'{0.0:10.1f}{0.0:10.1f}{float(ZU):10.1f}{0.0:10.1f}{0.0:10.1f}{float(ZU + 1000):10.1f}{0.35:10.2f}')
-w('*RIGIDWALL_PLANAR'); w(f'{2:10d}{0:10d}{0:10d}{0.0:10.1f}')
-w(f'{0.0:10.1f}{0.0:10.1f}{0.0:10.1f}{0.0:10.1f}{0.0:10.1f}{1000.0:10.1f}{0.05:10.2f}')
+# loco: no rigid wall (OpenRadioss drops rigid-body secondary nodes from walls); held on track by MAT_RIGID constraints
 w('*CONTACT_AUTOMATIC_SINGLE_SURFACE_ID'); w(f'{1:10d}')
 w(f'{0:10d}{0:10d}{5:10d}{0:10d}')
 w(f'{0.3:10.2f}{0.25:10.2f}')

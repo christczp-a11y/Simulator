@@ -13,6 +13,6 @@
  "n_nodes": 133118,
  "n_shells": 133000,
  "v_kmh": 60.0,
- "loco_front_y": 150.0,
+ "loco_front_y": 300.0,
  "units": "kg mm ms"
 }
