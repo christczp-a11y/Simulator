@@ -1,0 +1,18 @@
+{
+ "parts": {
+  "1": "coach side skin",
+  "2": "coach window piers",
+  "3": "coach roof",
+  "4": "coach floor",
+  "5": "coach end wall",
+  "6": "coach underframe sills",
+  "7": "coach cross members",
+  "8": "coach roof chamfer",
+  "20": "loco rigid"
+ },
+ "n_nodes": 133118,
+ "n_shells": 133000,
+ "v_kmh": 60.0,
+ "loco_front_y": 150.0,
+ "units": "kg mm ms"
+}
