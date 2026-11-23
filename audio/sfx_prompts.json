@@ -190,5 +190,29 @@
   "seconds": 5,
   "influence": 0.6,
   "text": "A single very loud firecracker explosion in an empty open countryside, heard outdoors: one bang, then the sound rolling and echoing far across flat fields and distant woods, slowly fading. Only one explosion, nothing else. No voices, no music."
+ },
+ {
+  "name": "ep02_drive",
+  "seconds": 8,
+  "influence": 0.5,
+  "text": "Inside a compact car on ordinary asphalt at steady road speed, windows closed. Continuous tire hiss, engine under load, small dashboard rattles; close and loud, harsh mid-range texture, not muffled. No voices, music, horn, crash or speed changes."
+ },
+ {
+  "name": "ep02_crush",
+  "seconds": 3,
+  "influence": 0.5,
+  "text": "From the empty cabin as a compact car meets a rigid wall: a single loud blunt contact followed immediately by a short, harsh mid-range crunch of sheet steel folding. Natural real-time transient, not muffled. No explosion, glass, voices or music."
+ },
+ {
+  "name": "ep02_glass",
+  "seconds": 2,
+  "influence": 0.5,
+  "text": "One close, loud crack of laminated automotive windshield glass under stress, a brief branching brittle snap with a harsh mid-range edge, not muffled. Real time. No shower of falling glass, metal crash, voices or music."
+ },
+ {
+  "name": "ep02_settle",
+  "seconds": 3,
+  "influence": 0.5,
+  "text": "A loose car trim piece and a small fastener fall to asphalt after an impact: distinct loud plastic clack and a short metallic bounce, harsh mid-range detail, not muffled. Real time in quiet open air, no crash, voices or music."
  }
 ]

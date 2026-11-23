@@ -1,0 +1,55 @@
+{
+  "native_parts": 474,
+  "trim_objects": 448,
+  "surface_vertices": 806137,
+  "lining_vertices": 12430,
+  "rigid_trim_groups": 24,
+  "max_error_mm": {
+    "rest": 0.0005623090941939713,
+    "rigid_patch": 0.0006848389299327848
+  },
+  "measured_frames": [
+    {
+      "solver_ms": 0.0,
+      "wheel_center_displacement_difference_mm": 2.288783399261119e-13,
+      "solver_windscreen_eroded_cells": 0,
+      "hidden_detailed_windscreen_faces": 0,
+      "visible_detailed_windscreen_faces": 10618
+    },
+    {
+      "solver_ms": 20.0003,
+      "wheel_center_displacement_difference_mm": 0.1177830741398176,
+      "solver_windscreen_eroded_cells": 0,
+      "hidden_detailed_windscreen_faces": 0,
+      "visible_detailed_windscreen_faces": 10618
+    },
+    {
+      "solver_ms": 40.0006,
+      "wheel_center_displacement_difference_mm": 0.48916966311069593,
+      "solver_windscreen_eroded_cells": 0,
+      "hidden_detailed_windscreen_faces": 0,
+      "visible_detailed_windscreen_faces": 10618
+    },
+    {
+      "solver_ms": 60.0009,
+      "wheel_center_displacement_difference_mm": 1.058270108812196,
+      "solver_windscreen_eroded_cells": 2,
+      "hidden_detailed_windscreen_faces": 3,
+      "visible_detailed_windscreen_faces": 10615
+    },
+    {
+      "solver_ms": 100.002,
+      "wheel_center_displacement_difference_mm": 0.2261260715170806,
+      "solver_windscreen_eroded_cells": 2,
+      "hidden_detailed_windscreen_faces": 3,
+      "visible_detailed_windscreen_faces": 10615
+    },
+    {
+      "solver_ms": 140.0,
+      "wheel_center_displacement_difference_mm": 0.37856923222702,
+      "solver_windscreen_eroded_cells": 2,
+      "hidden_detailed_windscreen_faces": 3,
+      "visible_detailed_windscreen_faces": 10615
+    }
+  ]
+}

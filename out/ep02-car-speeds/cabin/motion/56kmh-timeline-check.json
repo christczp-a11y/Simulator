@@ -1,0 +1,54 @@
+{
+  "samples": 281,
+  "missing_external_files": [],
+  "timeline_checks": [
+    {
+      "frame": 1,
+      "solver_ms": 0.0,
+      "max_pc2_playback_error_mm": 0.0,
+      "max_camera_position_error_mm": 5.551115123125783e-14,
+      "max_dial_rotation_matrix_error": 0.0,
+      "visible_windscreen_faces": 10618
+    },
+    {
+      "frame": 41,
+      "solver_ms": 20.0003,
+      "max_pc2_playback_error_mm": 0.0,
+      "max_camera_position_error_mm": 0.00027197297344843947,
+      "max_dial_rotation_matrix_error": 5.960464477539063e-08,
+      "visible_windscreen_faces": 10618
+    },
+    {
+      "frame": 81,
+      "solver_ms": 40.0006,
+      "max_pc2_playback_error_mm": 0.0,
+      "max_camera_position_error_mm": 0.00022756556198639342,
+      "max_dial_rotation_matrix_error": 1.7881393432617188e-07,
+      "visible_windscreen_faces": 10618
+    },
+    {
+      "frame": 121,
+      "solver_ms": 60.0009,
+      "max_pc2_playback_error_mm": 0.0,
+      "max_camera_position_error_mm": 0.00020265218467181335,
+      "max_dial_rotation_matrix_error": 5.960464477539063e-08,
+      "visible_windscreen_faces": 10615
+    },
+    {
+      "frame": 201,
+      "solver_ms": 100.002,
+      "max_pc2_playback_error_mm": 0.0,
+      "max_camera_position_error_mm": 0.000261453632884182,
+      "max_dial_rotation_matrix_error": 1.7881393432617188e-07,
+      "visible_windscreen_faces": 10615
+    },
+    {
+      "frame": 281,
+      "solver_ms": 140.0,
+      "max_pc2_playback_error_mm": 0.0,
+      "max_camera_position_error_mm": 0.00030857082637144635,
+      "max_dial_rotation_matrix_error": 2.384185791015625e-07,
+      "visible_windscreen_faces": 10615
+    }
+  ]
+}

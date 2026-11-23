@@ -1,0 +1,24 @@
+{
+  "peak_g": 60.66336678968098,
+  "peak_time_ms": 47.2997026,
+  "seat_pulse_end_ms": 68.01457683764883,
+  "duration_mean_window_ms": 139.30014260000002,
+  "last_time_ms": 139.90060000000003,
+  "end_speed_kmh": -10.7910576,
+  "cg_first_zero_ms": 53.89975260000001,
+  "max_energy_residual_pct": 6.419720126174286,
+  "max_hourglass_internal_pct": 0.0,
+  "sample_count": 1400,
+  "max_sample_gap_us": 100.60000000000625,
+  "max_part_HE_including_damping_over_global_internal_pct": 5.550899813884763,
+  "rear_seat_peaks": {
+    "left": {
+      "peak_g": 59.06772045940417,
+      "peak_time_ms": 48.4000326
+    },
+    "right": {
+      "peak_g": 60.07064449247155,
+      "peak_time_ms": 51.60048260000001
+    }
+  }
+}

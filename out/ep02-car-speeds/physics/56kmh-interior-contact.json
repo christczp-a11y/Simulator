@@ -1,0 +1,122 @@
+{
+  "confirmed_property_ids": [
+    2000017,
+    2000046,
+    2000063,
+    2000393,
+    2000477,
+    2000478,
+    2000479,
+    2000480,
+    2000481,
+    2000482,
+    2000483,
+    2000484,
+    2000509,
+    2000521
+  ],
+  "frames": 281,
+  "bricks": 3848,
+  "minimum_active_detJ_ratio": 0.5232630799329309,
+  "ever_nonpositive_bricks": 0,
+  "parts": [
+    {
+      "part_id": 2000017,
+      "bricks": 297,
+      "min_detJ_ratio": 0.7015673380101763,
+      "solver_ms": 33.001200000000004,
+      "element_id": 2200438
+    },
+    {
+      "part_id": 2000046,
+      "bricks": 162,
+      "min_detJ_ratio": 0.7137312752841173,
+      "solver_ms": 51.5009,
+      "element_id": 2195209
+    },
+    {
+      "part_id": 2000063,
+      "bricks": 1345,
+      "min_detJ_ratio": 0.5232630799329309,
+      "solver_ms": 56.0009,
+      "element_id": 2192274
+    },
+    {
+      "part_id": 2000393,
+      "bricks": 72,
+      "min_detJ_ratio": 0.5721391818931284,
+      "solver_ms": 36.000499999999995,
+      "element_id": 2189256
+    },
+    {
+      "part_id": 2000477,
+      "bricks": 160,
+      "min_detJ_ratio": 0.7362123273137464,
+      "solver_ms": 50.5011,
+      "element_id": 2189640
+    },
+    {
+      "part_id": 2000478,
+      "bricks": 160,
+      "min_detJ_ratio": 0.7658446911012742,
+      "solver_ms": 57.0006,
+      "element_id": 2189835
+    },
+    {
+      "part_id": 2000479,
+      "bricks": 72,
+      "min_detJ_ratio": 0.6717348361876361,
+      "solver_ms": 48.5006,
+      "element_id": 2190017
+    },
+    {
+      "part_id": 2000480,
+      "bricks": 100,
+      "min_detJ_ratio": 0.9693877731110272,
+      "solver_ms": 102.00099999999999,
+      "element_id": 2190138
+    },
+    {
+      "part_id": 2000481,
+      "bricks": 420,
+      "min_detJ_ratio": 0.9203986621270076,
+      "solver_ms": 140.0,
+      "element_id": 2190388
+    },
+    {
+      "part_id": 2000482,
+      "bricks": 420,
+      "min_detJ_ratio": 0.9104604167358364,
+      "solver_ms": 113.001,
+      "element_id": 2190808
+    },
+    {
+      "part_id": 2000483,
+      "bricks": 100,
+      "min_detJ_ratio": 0.9681251488962562,
+      "solver_ms": 54.5012,
+      "element_id": 2191138
+    },
+    {
+      "part_id": 2000484,
+      "bricks": 72,
+      "min_detJ_ratio": 0.6868045243052503,
+      "solver_ms": 57.5005,
+      "element_id": 2191268
+    },
+    {
+      "part_id": 2000509,
+      "bricks": 234,
+      "min_detJ_ratio": 0.8442090901417563,
+      "solver_ms": 39.000800000000005,
+      "element_id": 2200345
+    },
+    {
+      "part_id": 2000521,
+      "bricks": 234,
+      "min_detJ_ratio": 0.8325614665555647,
+      "solver_ms": 49.501400000000004,
+      "element_id": 2200025
+    }
+  ]
+}

@@ -64,17 +64,25 @@ def read_vtk(path):
     return out
 
 
+def cell_offsets(flat, types):
+    """Read the encoded widths: anim_to_vtk can pad triangles to four indices."""
+    start = np.empty(len(types), np.int64)
+    cursor = 0
+    for i in range(len(types)):
+        start[i] = cursor
+        count = int(flat[cursor])
+        if count < 1 or cursor + count >= len(flat):
+            raise ValueError(f"Invalid connectivity at cell {i}")
+        cursor += count + 1
+    if cursor != len(flat):
+        raise ValueError("Connectivity has trailing entries")
+    return start
+
+
 def faces(v):
     """Quads / triangles (and the outer faces are NOT extracted for solids) as index lists per cell type."""
     flat, types = v['cells_flat'], v['cell_types']
-    cnt = np.array([NPTS.get(int(t), 0) for t in types])
-    if (cnt == 0).any():
-        cnt, p = [], 0
-        for _ in types:
-            cnt.append(int(flat[p]))
-            p += cnt[-1] + 1
-        cnt = np.array(cnt)
-    start = np.concatenate([[0], np.cumsum(cnt + 1)[:-1]]) + 1
+    start = cell_offsets(flat, types) + 1
     quad = np.stack([flat[start[types == 9] + j] for j in range(4)], 1) if (types == 9).any() else np.zeros((0, 4), np.int64)
     tri = np.stack([flat[start[types == 5] + j] for j in range(3)], 1) if (types == 5).any() else np.zeros((0, 3), np.int64)
     return quad, tri, np.where(types == 9)[0], np.where(types == 5)[0]

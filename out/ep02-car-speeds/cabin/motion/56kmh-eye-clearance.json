@@ -1,0 +1,12 @@
+{
+  "head": {
+    "initial_eye_to_wheel_cm": 58.8642274510602,
+    "minimum_eye_to_wheel_cm": 34.2377297315432,
+    "since_contact_ms": 71.1111111111111
+  },
+  "fixed": {
+    "initial_eye_to_wheel_cm": 58.945142797151064,
+    "minimum_eye_to_wheel_cm": 54.12108406892332,
+    "since_contact_ms": 55.55555555555556
+  }
+}

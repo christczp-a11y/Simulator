@@ -1,0 +1,33 @@
+{
+  "restart_sha256": "7f8b9068446e4bfd0a4d4fad3703679be3c09d17178bc5d923a06357e9abdd39",
+  "paired_samples": 100,
+  "first_solver_ms": 45.00043,
+  "last_solver_ms": 54.90018,
+  "initial_total_kJ": 156.877,
+  "start_drift_pct": 3.567444558475752,
+  "baseline": {
+    "median_step_us": 0.9957830999999999,
+    "end_drift_pct": 5.135991928864403,
+    "max_abs_drift_pct": 5.135991928864403,
+    "first_sample_at_or_above_five_solver_ms": 53.6004
+  },
+  "capped": {
+    "median_step_us": 0.49800000000000005,
+    "end_drift_pct": 5.441205530447424,
+    "max_abs_drift_pct": 5.441205530447424,
+    "first_sample_at_or_above_five_solver_ms": 53.00031
+  },
+  "end_difference_percentage_points": 0.3052136015830209,
+  "end_difference_kJ": {
+    "INTERNAL ENERGY": 0.24047853986743092,
+    "KINETIC ENERGY": 0.041044323056838944,
+    "ROTATION ENERGY": 0.0017359793623217556,
+    "EXTERNAL WORK": -0.001368027515565278,
+    "CONTACT ENERGY": 0.19407125928901323,
+    "ELASTIC CONTACT ENERGY": -0.12702001501305482,
+    "FRICTIONAL CONTACT ENERGY": 0.3015512331793532,
+    "DAMPING CONTACT ENERGY": 0.019538524221731232,
+    "NO NAME": 0.4788099417553842
+  },
+  "study_cycles": 20081
+}

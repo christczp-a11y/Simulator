@@ -1,0 +1,25 @@
+{
+  "samples": 1400,
+  "last_sample_ms": 139.90060000000003,
+  "native_initial_kJ": 156.877,
+  "native_end_kJ": 166.9321,
+  "peak_abs_native_drift_pct": 6.4196791116607255,
+  "peak_simulation_ms": 108.60010000000001,
+  "end_native_drift_pct": 6.409543782708749,
+  "max_channel_roundoff_J": 0.10936000001430511,
+  "engine_printed_error_range_pct": [
+    -1.8,
+    0.1
+  ],
+  "end_contact_kJ": {
+    "total": 14.20429,
+    "elastic": 0.184565,
+    "friction": 13.12183,
+    "damping": 0.8979011
+  },
+  "end_added_mass_pct": 0.2411382,
+  "barrier_x_impulse_Ns": 23566.006604509832,
+  "ground_x_impulse_Ns": -446.3892765773789,
+  "delta_global_x_momentum_Ns": -23118.127,
+  "impulse_closure_Ns": 1.4903279324535106
+}
