@@ -1,0 +1,50 @@
+{
+  "external_assets": 0,
+  "shape_key_meshes": 486,
+  "scene_objects": 968,
+  "file_bytes": 80507741,
+  "compared_frames": [
+    {
+      "frame": 1,
+      "solver_ms": 0.0,
+      "evaluated_vertices": 816845,
+      "max_local_vertex_error_mm": 0.0,
+      "max_world_matrix_error": 0.0
+    },
+    {
+      "frame": 2,
+      "solver_ms": 20.0003,
+      "evaluated_vertices": 816845,
+      "max_local_vertex_error_mm": 2.9802322387695312e-05,
+      "max_world_matrix_error": 0.0
+    },
+    {
+      "frame": 3,
+      "solver_ms": 40.0006,
+      "evaluated_vertices": 816845,
+      "max_local_vertex_error_mm": 4.214684778958144e-05,
+      "max_world_matrix_error": 0.0
+    },
+    {
+      "frame": 4,
+      "solver_ms": 60.0009,
+      "evaluated_vertices": 816839,
+      "max_local_vertex_error_mm": 4.214684778958144e-05,
+      "max_world_matrix_error": 0.0
+    },
+    {
+      "frame": 5,
+      "solver_ms": 100.002,
+      "evaluated_vertices": 816839,
+      "max_local_vertex_error_mm": 4.214684778958144e-05,
+      "max_world_matrix_error": 0.0
+    },
+    {
+      "frame": 6,
+      "solver_ms": 140.0,
+      "evaluated_vertices": 816839,
+      "max_local_vertex_error_mm": 2.9802322387695312e-05,
+      "max_world_matrix_error": 0.0
+    }
+  ]
+}

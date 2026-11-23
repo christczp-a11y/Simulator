@@ -1,5 +1,22 @@
 # 56 km/h 驾驶舱变形检查
 
+## 单文件查看六个姿态
+
+在云工作区打开 `work/cabin-motion/ep02-cabin-six-poses.blend`（80.5 MB，Blender 4.5 LTS）。按左右方向键切换第 1–6 帧，依次对应求解起点后约 0、20、40、60、100、140 ms。默认从副驾驶侧看向方向盘，也可切换五个机位、旋转视角或编辑饰件。六个姿态都保存在文件内，可单独复制打开。
+
+![副驾驶侧看方向盘、车门和中控，按时间排列的六个姿态](portable-poses.jpg)
+
+独立重开单文件和完整工程，逐帧比较了全部 486 个变形网格，每个时刻约 81.7 万个顶点。最大局部坐标差为 0.000043 mm 以内，968 个场景对象的世界变换逐项一致，外部文件依赖为零。[逐帧记录](56kmh-portable-check.json)
+
+在仓库根目录运行下列命令可从完整时间轴重建单文件，然后逐帧复核。
+
+```bash
+work/blender-4.5.16-linux-x64/blender -b work/cabin-motion/timeline/ep02-cabin-motion.blend -t 4 --python-exit-code 1 -P scripts/ep02_cabin_portable.py -- work/cabin-motion/ep02-cabin-six-poses.blend
+work/blender-4.5.16-linux-x64/blender -b -t 4 --python-exit-code 1 -P scripts/ep02_cabin_portable_check.py -- work/cabin-motion/timeline/ep02-cabin-motion.blend work/cabin-motion/ep02-cabin-six-poses.blend work/cabin-motion/portable-check.json
+```
+
+## 驾驶员视角与固定机位
+
 ![六个时刻的驾驶员头部与车身固定机位](overview.jpg)
 
 [撞前](approach.jpg) · [首次墙力](contact.jpg) · [20 ms](20ms.jpg) · [40 ms](40ms.jpg) · [60 ms](60ms.jpg) · [100 ms](100ms.jpg)
@@ -11,6 +28,8 @@
 ## 在 Blender 查看完整时程
 
 云工作区的 `work/cabin-motion/timeline/ep02-cabin-motion.blend` 有 **281 帧**，约每 0.5 ms 一个原生求解样本，覆盖 0–140 ms。拖动时间轴可查看各时刻，默认从副驾驶位置看向方向盘。五台相机均已保留。时间轴第 1 帧是求解起点，第 121 帧约为 60.00 ms。工程内的 `Solver sample times.csv` 保存每帧的精确仿真时间和质心合速度。下载完整工程时将同目录的 `cache/` 一起保留。
+
+工作区内已打包完整工程和全部点缓存，文件为 `work/cabin-motion/ep02-cabin-motion.zip`（2.45 GB）。解压后打开 `timeline/ep02-cabin-motion.blend`。两个工程包含原车几何，按项目约定保存在工作区。
 
 重建需要前一步的 v1l 节点缓存、粗网格零件表、速度历程和 v2j 静态驾驶舱工程。以下命令在仓库根目录执行。最后一个参数是新的输出目录，用于保留已有的工程。
 

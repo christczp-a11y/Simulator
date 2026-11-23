@@ -2,6 +2,8 @@
 
 **驾驶舱已完成静态建模和 56 km/h 变形绑定，281 个求解样本可在 Blender 中逐帧检查。** [六组双机位对照](out/ep02-car-speeds/cabin/motion/) · [同机位改模前后](out/ep02-car-speeds/cabin/driver-comparison.jpg) · [图库与重建方法](out/ep02-car-speeds/cabin/README.md)
 
+优先查看工作区的 `work/cabin-motion/ep02-cabin-six-poses.blend`（80.5 MB）。六个求解时刻的 486 个变形网格已内嵌，并与完整工程逐帧重开比对，最大局部顶点差小于 0.000043 mm。完整时间轴和点缓存已打包为 `work/cabin-motion/ep02-cabin-motion.zip`（2.45 GB）。[副驾驶侧六个姿态](out/ep02-car-speeds/cabin/motion/portable-poses.jpg) · [逐帧对比数值](out/ep02-car-speeds/cabin/motion/56kmh-portable-check.json)
+
 56 km/h 粗网格已算完 140 ms，最大能量残差 6.42%，超过 5% 验收线。其余速度和视频合成暂停。
 
 ## 官方模型和输入检查

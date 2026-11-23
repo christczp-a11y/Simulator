@@ -1,6 +1,6 @@
 # 第二集交付状态
 
-驾驶舱已有可编辑的静态模型和 281 帧的变形检查工程。[六组双机位图与工程说明](cabin/motion/)
+查看驾驶舱可直接打开工作区的 `work/cabin-motion/ep02-cabin-six-poses.blend`（80.5 MB）。用左右方向键切换六个变形姿态，五个机位和内饰都可编辑。完整 281 帧工程与缓存也已打包在 `work/cabin-motion/ep02-cabin-motion.zip`（2.45 GB）。[六个姿态预览](cabin/motion/portable-poses.jpg) · [双机位对照与重建说明](cabin/motion/)
 
 驾驶位和仪表台采用同款车的 CCSA 精细版 v2j 作为几何依据。驾驶舱饰件、参考来源、静帧和本机重建命令见[模型说明](cabin/README.md)。
 
