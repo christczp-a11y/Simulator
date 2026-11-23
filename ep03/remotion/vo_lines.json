@@ -1,0 +1,86 @@
+[
+    {
+        "id":  "V1",
+        "voice":  "daniel",
+        "shot":  "s01",
+        "text":  "A train is stopped on the track. Behind it, another one is coming."
+    },
+    {
+        "id":  "V2",
+        "voice":  "daniel",
+        "shot":  "s02",
+        "text":  "Its automatic train control has been switched off."
+    },
+    {
+        "id":  "V3",
+        "voice":  "daniel",
+        "shot":  "s03",
+        "text":  "Sunday, November 8th. Fifty kilometres south of Cairo. Train 2010, Cairo to Aswan, stands between Kafr Ammar and Al-Raqqa."
+    },
+    {
+        "id":  "V4",
+        "voice":  "daniel",
+        "shot":  "s04",
+        "text":  "On the same line, train 134 leaves El-Ayyat."
+    },
+    {
+        "id":  "V5",
+        "voice":  "daniel",
+        "shot":  "s05",
+        "text":  "In the last coach of train 2010, passengers wait for it to move again."
+    },
+    {
+        "id":  "Q1",
+        "voice":  "quote",
+        "shot":  "s06",
+        "text":  "Injured passengers said the train ran at high speed from the moment it left El-Ayyat station."
+    },
+    {
+        "id":  "Q2",
+        "voice":  "quote",
+        "shot":  "s07",
+        "text":  "The two station staff admitted they did not monitor the control panel for signal tower 10."
+    },
+    {
+        "id":  "Q3",
+        "voice":  "quote",
+        "shot":  "s08",
+        "text":  "Technical inspection confirmed the driver had switched off the automatic control system before the collision."
+    },
+    {
+        "id":  "V6",
+        "voice":  "daniel",
+        "shot":  "s16",
+        "text":  "Seven people were killed. More than a hundred were injured."
+    },
+    {
+        "id":  "Q4",
+        "voice":  "quote",
+        "shot":  "s17",
+        "text":  "The duty officer altered the signal log to cover up his negligence."
+    },
+    {
+        "id":  "V7",
+        "voice":  "daniel",
+        "shot":  "s18",
+        "text":  "Both station staff are in custody."
+    },
+    {
+        "id":  "V8",
+        "voice":  "daniel",
+        "shot":  "s19",
+        "text":  "The assistant driver is still too badly injured to be questioned."
+    },
+    {
+        "id":  "V9",
+        "voice":  "daniel",
+        "shot":  "s19",
+        "text":  "The investigation has not concluded."
+    },
+    {
+        "id":  "V10",
+        "voice":  "daniel",
+        "shot":  "history",
+        "text":  "Seventeen years ago, at the same place, another train ran into a stopped one. At least fifty people died."
+    }
+]
