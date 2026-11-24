@@ -182,3 +182,8 @@ El Ayyat（埃及列车追尾）的数据：21 个镜头、2,880 帧（30 fps，
 - Google Drive `MyDrive/vulcan/` 还在：每个镜头的 PNG 帧（约 5 GB）、12 个镜头视频 `videos/`、烟雾缓存和 liftoff.blend、源码包、`resume.py`。成片已发布，删不删由 Chris 决定。`MyDrive/blender_cache/` 和笔记本 `blender.ipynb` 下一集继续用，不要删。
 - 文件夹命名：`Out/ep02-rocket amazon` 已经是 Vulcan 这一集，新一集用新的文件夹名，别覆盖它。
 
+
+## 八、给 Chris 看的更新一律放网页墙（2026-11-24 Chris 定）
+
+每集一个网页墙 Artifact（EP04：https://claude.ai/artifact/VfT8179AUWz6jfmtSfGh2h ，本机源文件 `Out\ep04-黎曼猜想\wall.html`），按类别分标签：脚本、事实核对、渲染估算、风格帧、音效、发布。每次更新都重新发布到同一个链接，回复里只贴链接和一句改了什么；不再一份份发 .md 文件（线程里的附件是旧副本，不会跟着本机文件更新）。
+另：24 fps 已定（二·11 的问题已解决）；频道定位是「新闻还原频道」，不只做事故。
