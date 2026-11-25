@@ -219,3 +219,9 @@ Chris 原话：“光和阴影是我所有频道最重要的，一定要抓好�
 ## 十三、错题本（2026-11-24 Chris 定）
 
 Chris 指出过的错按类别记在 `Out\错题本.md`（空间关系和比例、看不懂的东西、光、字幕排版、台词、音效、交片前自查）。每集开工前读一遍，交片前按类逐条自查，新错补进对应类别。
+
+## 十四、每集必用的技能（2026-11-25 Chris 定）
+
+- **音效：ElevenLabs 官方音效技能**，装在 `C:\YouTubeNeuropolis\.claude\skills\sound-effects`（`npx skills add elevenlabs/skills --skill sound-effects`）。每集必须用：显式 `eleven_text_to_sound_v3`，提示词写动作+场所+氛围，底噪开 loop，每种出 3 版测频谱后挑；只给画面里看得见的东西配声，转场不加呼啸，不用 braam。EP04 的提示词和取舍见 `Out\ep04-黎曼猜想\work\sfx_lib\SOURCES.md`。
+- **Blender**：前几集都没用过任何 Blender 技能，全是本机无界面 Python 脚本（`blender -b -P`，EP04 的公共函数在 `worklender\ep04lib.py`）。本机连着官方 Blender MCP（附 Blender API 文档和手册），也一直没调用过。
+- EP04 收尾：渲染帧、风格帧、Remotion 的 node_modules、旧版成片已删（释放 8.7 GB）；保留成片、手机版、缩略图、文案、全部脚本、Poly Haven 素材库（`workssets_ph`，下一集复用）和渲好的镜头视频（`workemotion\public4`）。
