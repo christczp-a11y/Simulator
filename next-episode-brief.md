@@ -1,5 +1,13 @@
 # 下一集制作交接：要提高的地方
 
+## 零、主干：每集固定十步（Chris 2026-11-26 定，必须照做，优先于下面所有章节）
+
+1 选题写故事 → 2 ElevenLabs 旁白 → 3 Whisper 逐词时间（据此排镜头表）→ 4 角色造型 → 5 three.js 预演每个镜头怎么走，自检改到没毛病，导出轨迹给 Blender 用 → 6 造 3D 世界，确保没有逻辑错误 → 7 渲染 → 8 ElevenLabs MCP 做音效，压在旁白之下 → 9 Remotion 字幕 → 10 全部组装。
+
+- 每步用什么工具、交什么、哪里停下等 Chris、预演自检清单：见项目根目录 `WORKFLOW.md`（本机 CLAUDE.md 自动载入；云端副本在 Simulator 仓库根目录）。
+- 闸门已装（本机 `.claude\settings.json` + `.claude\hooks\gate.py`）：没加载 blender-core 不许跑 Blender；没有 `previz\selfcheck.md` 和 `render_estimate.md` 不许渲整段动画；音效不许自写脚本打 API，只能先加载 sound-effects 技能再走 ElevenLabs MCP。
+- 和旧章节冲突时以本节为准：逐词时间改用 Whisper（取代第十一节的 ElevenLabs 强制对齐）；音效走 MCP（取代二·五「先找库里现成的」）；开渲门槛统一 1 小时；Blender 在 Colab 跑。
+
 写于 2026-11-22，根据 Vulcan 那一集（成片在 `Out\ep02-rocket amazon\`）的复盘整理。
 给下一个对话用：开工前先读完这份文件，再读项目记忆（`MEMORY.md` 里的三条）。
 
@@ -225,5 +233,12 @@ Chris 指出过的错按类别记在 `Out\错题本.md`（空间关系和比例�
 ## 十四、每集必用的技能（2026-11-25 Chris 定）
 
 - **音效：ElevenLabs 官方音效技能**，装在 `C:\YouTubeNeuropolis\.claude\skills\sound-effects`（`npx skills add elevenlabs/skills --skill sound-effects`）。每集必须用：显式 `eleven_text_to_sound_v3`，提示词写动作+场所+氛围，底噪开 loop，每种出 3 版测频谱后挑；只给画面里看得见的东西配声，转场不加呼啸，不用 braam。EP04 的提示词和取舍见 `Out\ep04-黎曼猜想\work\sfx_lib\SOURCES.md`。
+- **音效走 MCP（Chris 2026-11-25）**：除了用上面的技能，还要通过 ElevenLabs MCP 调用，不要自写脚本直接打 API。截至 EP05 本机还没装 ElevenLabs MCP，开工先问 Chris 装不装。
 - **Blender**：前几集都没用过任何 Blender 技能，全是本机无界面 Python 脚本（`blender -b -P`，EP04 的公共函数在 `work\blender\ep04lib.py`）。本机连着官方 Blender MCP（附 Blender API 文档和手册），也一直没调用过。
 - EP04 收尾：渲染帧、风格帧、Remotion 的 node_modules、旧版成片已删（释放 8.7 GB）；保留成片、手机版、缩略图、文案、全部脚本、Poly Haven 素材库（`work\assets_ph`，下一集复用）和渲好的镜头视频（`work\remotion\public\v4`）。
+
+## 十五、EP05 收尾状态（2026-11-26，Chris 不满意本集过程）
+
+- 全部资料原地保留在 `Out\ep05-motogp-austria\`（约 3.5 GB，一个文件都没删）：成片 EP05_final.mp4 + 手机版、缩略图 thumbnails\、发布文案 ep05-publish-copy.txt、README.txt、网页墙 wall.html（https://claude.ai/artifact/P1NYEe8jU6BwDLsRr19hfD ）、全部脚本 work\（blender\、comp\、vo\、sfx_lib\、osm\）、素材 workssets、workssets_ph、风格帧和检查图。Drive MyDrive/ep05/ 有修正后的全部帧、成片、Colab 笔记本和代码包。
+- **本集最大的错（错题本已记）**：Chris 明确要求用 blender-skills（项目 .claude\skills 里 28 个 blender-*）和 ElevenLabs 技能 + MCP，我装了 blender-skills 却一次都没调用，只用了 sound-effects 技能；ElevenLabs MCP 没用（Chris 说上一集已装过且用过，我查配置文件没找到就当成没装，没再问）。下一集开工第一件事：Skill 加载 blender-core 等技能，音效走 ElevenLabs MCP，找不到 MCP 就先问 Chris 在哪里，不许自己下结论。
+- 其他教训见错题本 EP05 各条：事故路线搞反、赛道边缘黑带（地面层留缝露出底板）、长字幕出画。
