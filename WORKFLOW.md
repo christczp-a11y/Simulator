@@ -24,8 +24,12 @@
 5. 逻辑：因果先后对、物理方向对（车往哪飞、影子朝哪）。
 自检记录写进 `previz\selfcheck.md`：每条“过 / 改了什么”。
 
-## 第 6 步逻辑检查
+## 第 6 步逻辑检查和细节检查
 错题本第一类（空间关系和比例）逐条过；光三关（材质反射、光有设计、近景经得起放大）；blender-asset-qa 报告零问题才出风格帧。
+卡通风格另外三关（2026-11-26 Chris 定，全部必守）：
+- 画风：`toon\docs\09_LOOK_SPEC.md`，风格帧过 `toon\tools\study\look_check.py`（11 项）。
+- 有水的镜头：`toon\docs\10_HYBRID_WATER.md`（世界卡通、水和光写实、原理用白线、每集一个剖面镜头）。
+- 场景细节：`toon\docs\11_SET_DETAIL.md` 八类（车辆含车内、路面、路边设施、植物、建筑、草地、天空天气、共通），逐条写进本集 `set_detail_check.md`。
 
 ## 卡通风格（toon\，11-26 从 ricksclips 风格包引入）每步用哪个工具
 这十步就是照这个风格包的流程定的。卡通风格的项目放在 `toon\projects\<名字>\`；风格和质量标准是 `toon\RULEBOOK.md`（英文，和十步冲突时以十步为准，见 `toon\CLAUDE.md` 开头）。
@@ -45,5 +49,5 @@
 ## 闸门（系统自动执行，不靠自觉）
 `.claude\hooks\gate.py` 会拦下：
 - 没先加载 blender-core 技能就跑 Blender（本机、Blender MCP、Colab）。
-- 本集没有 `previz\selfcheck.md` 和 `render_estimate.md` 就开渲整段动画。
+- 本集没有 `previz\selfcheck.md`、`set_detail_check.md` 和 `render_estimate.md` 就开渲整段动画（Blender、网页引擎、RENDER*.bat 都算）。
 - 自写脚本直接调 ElevenLabs 音效接口；没加载 sound-effects 技能就用 MCP 出音效。

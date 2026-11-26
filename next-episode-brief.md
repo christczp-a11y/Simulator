@@ -239,6 +239,24 @@ Chris 指出过的错按类别记在 `Out\错题本.md`（空间关系和比例�
 
 ## 十五、EP05 收尾状态（2026-11-26，Chris 不满意本集过程）
 
-- 全部资料原地保留在 `Out\ep05-motogp-austria\`（约 3.5 GB，一个文件都没删）：成片 EP05_final.mp4 + 手机版、缩略图 thumbnails\、发布文案 ep05-publish-copy.txt、README.txt、网页墙 wall.html（https://claude.ai/artifact/P1NYEe8jU6BwDLsRr19hfD ）、全部脚本 work\（blender\、comp\、vo\、sfx_lib\、osm\）、素材 workssets、workssets_ph、风格帧和检查图。Drive MyDrive/ep05/ 有修正后的全部帧、成片、Colab 笔记本和代码包。
+- 全部资料原地保留在 `Out\ep05-motogp-austria\`（约 3.5 GB，一个文件都没删）：成片 EP05_final.mp4 + 手机版、缩略图 thumbnails\、发布文案 ep05-publish-copy.txt、README.txt、网页墙 wall.html（https://claude.ai/artifact/P1NYEe8jU6BwDLsRr19hfD ）、全部脚本 work\（blender\、comp\、vo\、sfx_lib\、osm\）、素材 work\assets、work\assets_ph、风格帧和检查图。Drive MyDrive/ep05/ 有修正后的全部帧、成片、Colab 笔记本和代码包。
 - **本集最大的错（错题本已记）**：Chris 明确要求用 blender-skills（项目 .claude\skills 里 28 个 blender-*）和 ElevenLabs 技能 + MCP，我装了 blender-skills 却一次都没调用，只用了 sound-effects 技能；ElevenLabs MCP 没用（Chris 说上一集已装过且用过，我查配置文件没找到就当成没装，没再问）。下一集开工第一件事：Skill 加载 blender-core 等技能，音效走 ElevenLabs MCP，找不到 MCP 就先问 Chris 在哪里，不许自己下结论。
 - 其他教训见错题本 EP05 各条：事故路线搞反、赛道边缘黑带（地面层留缝露出底板）、长字幕出画。
+
+
+## 十六、卡通风格线（2026-11-26 Chris 定，全部必守，不许丢）
+
+Chris 学爆款频道 RicksClips 定了十步工作流（第零节），并要求用它的画风做新风格、尽量病毒传播。EP05 不再做，新选题等 Chris 给。
+所有卡通相关的东西在 `C:\YouTubeNeuropolis\toon\`，做卡通先加载技能 toon-style（`.claude\skills\toon-style`）。
+
+**已定（按时间）**
+1. 十步工作流 + 闸门：见第零节和 `WORKFLOW.md`；闸门也管 toon 的整段渲染（render_pc.mjs、Blender --frames ≥60 帧、RENDER*.bat）。
+2. 字幕：画面正中，一次 1–3 个词（Remotion）。
+3. ElevenLabs：claude.ai 连接器已连上（新会话才看得到它的工具，先核对有没有音效和旁白工具）；Whisper 已装（faster-whisper，CPU，small.en，`toon\tools\timing.py`，失败直接报错不许估算）。
+4. 风格包：ricksclips 风格包原件在 `research
+icksclips-kit\`，工作副本 `toon\`；规则 `toon\RULEBOOK.md`（和十步冲突时以十步为准，见 `toon\CLAUDE.md` 开头）。本机实测：网页引擎约 0.5 秒/帧，Blender 卡通场景约 1.3 秒/帧。
+5. 画风（Ricks 4 条片 1,258 帧实测）：`toon\docs\09_LOOK_SPEC.md`。手绘 PBR 材质、金属/清漆/亮面地板/玻璃有真反光、暖主光冷紫阴影、光晕、远处雾气、画出来的天空、角色投影、角色脸纯白不受光。Blender 实现在 `toon\blender\parts\aa_look.py`、`e_look.py`。风格帧必须过 `toon\tools\study\look_check.py`（11 项）。
+6. 半卡通半写实（参考 The Why Side 螺旋桨片 241 帧）：`toon\docs\b_HYBRID_WATER.md`。世界和人卡通、水和光写实（折射、焦散、光柱、立体气泡）、原理用白色手绘线、每集至少一个剖面镜头；样板 `toon\blender\parts\d_sets_water.py`。v1 约 3.7 秒/帧，正式用前要降到 2 秒以内。
+7. 场景建模细节（Ricks《Why Drivers Started Filming The Road》311 帧）：`toon\docs	_SET_DETAIL.md`。场景用细节完整、比例真实的现成 3D 模型搭，再统一成手绘 PBR + 描边；八类标准：车辆（外观部件 + 车内全建 + 4–10 辆车流）、路面（颗粒沥青、标线、轮胎印、雨天湿亮）、路边设施（护栏、隔音墙、电线杆、路牌）、植物（≥3 种树、草丛、林线）、建筑（墙板、瓦、窗格、车库门、门廊）、草地（立体草叶 + 生活道具）、天空天气（渐变 + 画的积云，黄昏、夜、雨）、共通（前中远三层、≥3 反光物、≥1 发光物、可读文字）。每个场景写 `set_detail_check.md`，闸门要求它存在才准整段渲染。
+
+**待 Chris 回答**：新风格是否用“纸雕立体书”方向；卡通片能否在他电脑渲（约 15 分钟/分钟片）；要不要背景音乐。
