@@ -27,6 +27,21 @@
 ## 第 6 步逻辑检查
 错题本第一类（空间关系和比例）逐条过；光三关（材质反射、光有设计、近景经得起放大）；blender-asset-qa 报告零问题才出风格帧。
 
+## 卡通风格（toon\，11-26 从 ricksclips 风格包引入）每步用哪个工具
+这十步就是照这个风格包的流程定的。卡通风格的项目放在 `toon\projects\<名字>\`；风格和质量标准是 `toon\RULEBOOK.md`（英文，和十步冲突时以十步为准，见 `toon\CLAUDE.md` 开头）。
+| 步 | 工具 |
+|---|---|
+| 1 | `toon\docs\02_SCRIPT_WRITING.md`、`03_HOOK_WRITING.md`：一个人、一个诡计、一个反转；三段式钩子 |
+| 2 | ElevenLabs（MCP 优先），一条只录一次，先报花费；`tools\tighten_voice.py` 只剪静音，不许剪到字 |
+| 3 | `python tools\timing.py voice.wav script.txt --out work`（Whisper，CPU）→ `work\words.json` |
+| 4 | `characters\rick.js` 画 2D 角色卡；每集新角色，先出设计稿 |
+| 5 | 网页引擎 `story.js` 排镜头和相机；`node render_pc.mjs`（Edge 显卡，约 0.5 秒/帧）出每镜中间一帧拼总览；`tools\study\qa_motion.py` 动态质检必须 PASS |
+| 6 | `blender\parts\` 建 3D 场景（卡通材质 + 描边），读引擎导出的 frames.json |
+| 7 | `RENDER_BLENDER.bat` 或网页引擎整片渲染（闸门要求先有预演自检和渲染估算）|
+| 8 | ElevenLabs MCP 音效：约每 10 秒 8 个，比旁白低约 12 dB |
+| 9 | Remotion 字幕：画面正中、一次 1–3 个词 |
+| 10 | 合成 + 柔光（screen 0.4）+ -14 LUFS；交片前过 RULEBOOK 末尾的检查清单 |
+
 ## 闸门（系统自动执行，不靠自觉）
 `.claude\hooks\gate.py` 会拦下：
 - 没先加载 blender-core 技能就跑 Blender（本机、Blender MCP、Colab）。
