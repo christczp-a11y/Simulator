@@ -2,6 +2,7 @@
 
 1 选题写故事 → 2 ElevenLabs 旁白 → 3 Whisper 逐词时间 → 4 角色造型 → 5 three.js 预演并自检到没毛病 → 6 造 3D 世界（无逻辑错误）→ 7 渲染 → 8 ElevenLabs MCP 音效（压在旁白之下）→ 9 Remotion 字幕 → 10 全部组装。
 每步的工具、产出、停下等 Chris 的关口和自检全文见 WORKFLOW.md（下一行自动载入；正本在 Chris 电脑 C:\YouTubeNeuropolis\WORKFLOW.md）。第一条回复要说明本集现在在第几步。本机有闸门 hook 强制执行，云端会话没有闸门，更要自觉照做。
+**卡通风格（新风格，11-26 起）**：开工先加载技能 toon-style（只在 Chris 电脑上有）；所有已定规矩汇总在交接文件第十六节。
 
 @WORKFLOW.md
 
