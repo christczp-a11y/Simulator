@@ -5,7 +5,7 @@
 1 选题写故事 → 2 ElevenLabs 旁白 → 3 Whisper 逐词时间（据此排镜头表）→ 4 角色造型 → 5 导演台预演每个镜头怎么走，自检改到没毛病，导出轨迹给纯代码场景用 → 6 造 3D 世界，确保没有逻辑错误 → 7 渲染 → 8 ElevenLabs MCP 做音效，压在旁白之下 → 9 Remotion 字幕 → 10 全部组装。
 
 - 每步用什么工具、交什么、哪里停下等 Chris、预演自检清单：见项目根目录 `WORKFLOW.md`（本机 CLAUDE.md 自动载入；云端副本在 Simulator 仓库根目录）。
-- **技术路线（Chris 2026-11-27 定，EP06 起）：纯代码 Three.js**（第十八节），第 4–7 步不用 Blender：人物、场景都用代码建，第 5 步在导演台 `tools\director\` 预演（要改成直接读纯代码场景），第 7 步本机 `render_pure.mjs` 渲。28 个 Blender 技能已撤到 `_archive\blender-skills-2026-11-27\`（没删，要恢复搬回 `.claude\skills\`）。
+- **技术路线（Chris 2026-11-27 定，EP06 起）：纯代码 Three.js**（第十八节），第 4–7 步不用 Blender：人物、场景都用代码建，第 5 步在导演台 `tools\director\` 预演（要改成直接读纯代码场景），第 7 步本机 `render_pure.mjs` 渲。28 个 Blender 技能已删除（11-27 Chris 定；Blender MCP 连接器保留）。
 - 闸门已装（本机 `.claude\settings.json` + `.claude\hooks\gate.py`）：没有 `previz\selfcheck.md`、`set_detail_check.md` 和 `render_estimate.md` 不许渲整段动画（`render_pure.mjs` 渲整镜、Blender -a、RENDER*.bat；`--bench`、`--cam`、12 帧以内的 `--frames` 不算）；音效不许自写脚本打 API，只能先加载 sound-effects 技能再走 ElevenLabs MCP。原来“没加载 blender-core 不许跑 Blender”那条 11-27 随 Blender 技能一起撤了。
 - 和旧章节冲突时以本节为准：逐词时间改用 Whisper（取代第十一节的 ElevenLabs 强制对齐）；音效走 MCP（取代二·五「先找库里现成的」）；开渲门槛统一 1 小时；渲染在本机（纯代码约 0.09 秒/帧），不用 Colab。
 - 讲故事学 RicksClips 的真实套路（`toon\docs\02_SCRIPT_WRITING.md`、`07_RICKS_DEEP_STUDY.md`）：一个人、一个诡计、一个反转；四种钩子（反常动作、悖论、对“你”说、规矩或传说）；不许每集照搬同一个结构（EP06 开工时误把 EP05 的“三个嫌疑人”当成固定套路，被纠正）。
