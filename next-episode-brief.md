@@ -2,11 +2,13 @@
 
 ## 零、主干：每集固定十步（Chris 2026-11-26 定，必须照做，优先于下面所有章节）
 
-1 选题写故事 → 2 ElevenLabs 旁白 → 3 Whisper 逐词时间（据此排镜头表）→ 4 角色造型 → 5 three.js 预演每个镜头怎么走，自检改到没毛病，导出轨迹给 Blender 用 → 6 造 3D 世界，确保没有逻辑错误 → 7 渲染 → 8 ElevenLabs MCP 做音效，压在旁白之下 → 9 Remotion 字幕 → 10 全部组装。
+1 选题写故事 → 2 ElevenLabs 旁白 → 3 Whisper 逐词时间（据此排镜头表）→ 4 角色造型 → 5 导演台预演每个镜头怎么走，自检改到没毛病，导出轨迹给纯代码场景用 → 6 造 3D 世界，确保没有逻辑错误 → 7 渲染 → 8 ElevenLabs MCP 做音效，压在旁白之下 → 9 Remotion 字幕 → 10 全部组装。
 
 - 每步用什么工具、交什么、哪里停下等 Chris、预演自检清单：见项目根目录 `WORKFLOW.md`（本机 CLAUDE.md 自动载入；云端副本在 Simulator 仓库根目录）。
-- 闸门已装（本机 `.claude\settings.json` + `.claude\hooks\gate.py`）：没加载 blender-core 不许跑 Blender；没有 `previz\selfcheck.md` 和 `render_estimate.md` 不许渲整段动画；音效不许自写脚本打 API，只能先加载 sound-effects 技能再走 ElevenLabs MCP。
-- 和旧章节冲突时以本节为准：逐词时间改用 Whisper（取代第十一节的 ElevenLabs 强制对齐）；音效走 MCP（取代二·五「先找库里现成的」）；开渲门槛统一 1 小时；Blender 在 Colab 跑。
+- **技术路线（Chris 2026-11-27 定，EP06 起）：纯代码 Three.js**（第十八节），第 4–7 步不用 Blender：人物、场景都用代码建，第 5 步在导演台 `tools\director\` 预演（要改成直接读纯代码场景），第 7 步本机 `render_pure.mjs` 渲。28 个 Blender 技能已撤到 `_archive\blender-skills-2026-11-27\`（没删，要恢复搬回 `.claude\skills\`）。
+- 闸门已装（本机 `.claude\settings.json` + `.claude\hooks\gate.py`）：没有 `previz\selfcheck.md`、`set_detail_check.md` 和 `render_estimate.md` 不许渲整段动画（`render_pure.mjs` 渲整镜、Blender -a、RENDER*.bat；`--bench`、`--cam`、12 帧以内的 `--frames` 不算）；音效不许自写脚本打 API，只能先加载 sound-effects 技能再走 ElevenLabs MCP。原来“没加载 blender-core 不许跑 Blender”那条 11-27 随 Blender 技能一起撤了。
+- 和旧章节冲突时以本节为准：逐词时间改用 Whisper（取代第十一节的 ElevenLabs 强制对齐）；音效走 MCP（取代二·五「先找库里现成的」）；开渲门槛统一 1 小时；渲染在本机（纯代码约 0.09 秒/帧），不用 Colab。
+- 讲故事学 RicksClips 的真实套路（`toon\docs\02_SCRIPT_WRITING.md`、`07_RICKS_DEEP_STUDY.md`）：一个人、一个诡计、一个反转；四种钩子（反常动作、悖论、对“你”说、规矩或传说）；不许每集照搬同一个结构（EP06 开工时误把 EP05 的“三个嫌疑人”当成固定套路，被纠正）。
 
 写于 2026-11-22，根据 Vulcan 那一集（成片在 `Out\ep02-rocket amazon\`）的复盘整理。
 给下一个对话用：开工前先读完这份文件，再读项目记忆（`MEMORY.md` 里的三条）。
@@ -241,7 +243,7 @@ Chris 指出过的错按类别记在 `Out\错题本.md`（空间关系和比例�
 ## 十五、EP05 收尾状态（2026-11-26，Chris 不满意本集过程）
 
 - 全部资料原地保留在 `Out\ep05-motogp-austria\`（约 3.5 GB，一个文件都没删）：成片 EP05_final.mp4 + 手机版、缩略图 thumbnails\、发布文案 ep05-publish-copy.txt、README.txt、网页墙 wall.html（https://claude.ai/artifact/P1NYEe8jU6BwDLsRr19hfD ）、全部脚本 work\（blender\、comp\、vo\、sfx_lib\、osm\）、素材 work\assets、work\assets_ph、风格帧和检查图。Drive MyDrive/ep05/ 有修正后的全部帧、成片、Colab 笔记本和代码包。
-- **本集最大的错（错题本已记）**：Chris 明确要求用 blender-skills（项目 .claude\skills 里 28 个 blender-*）和 ElevenLabs 技能 + MCP，我装了 blender-skills 却一次都没调用，只用了 sound-effects 技能；ElevenLabs MCP 没用（Chris 说上一集已装过且用过，我查配置文件没找到就当成没装，没再问）。下一集开工第一件事：Skill 加载 blender-core 等技能，音效走 ElevenLabs MCP，找不到 MCP 就先问 Chris 在哪里，不许自己下结论。
+- **本集最大的错（错题本已记）**：Chris 明确要求用 blender-skills（项目 .claude\skills 里 28 个 blender-*）和 ElevenLabs 技能 + MCP，我装了 blender-skills 却一次都没调用，只用了 sound-effects 技能；ElevenLabs MCP 没用（Chris 说上一集已装过且用过，我查配置文件没找到就当成没装，没再问）。下一集开工第一件事：Skill 加载 blender-core 等技能，音效走 ElevenLabs MCP，找不到 MCP 就先问 Chris 在哪里，不许自己下结论。（11-27 更新：EP06 起不用 Blender，Blender 技能已撤；“点名的工具必须实际调用”这条规矩照旧适用于 sound-effects 技能和 ElevenLabs MCP。）
 - 其他教训见错题本 EP05 各条：事故路线搞反、赛道边缘黑带（地面层留缝露出底板）、长字幕出画。
 
 

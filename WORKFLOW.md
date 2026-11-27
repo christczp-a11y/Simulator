@@ -1,6 +1,7 @@
 # 每集固定工作流（Chris 2026-11-26 定，必须遵守，不许跳步、不许换顺序）
 
 十步按顺序做。每一步开头先加载这一步写的技能，结尾交出“产出”，标了 **停** 的地方必须等 Chris 点头才能进下一步。
+**技术路线（Chris 2026-11-27 定，EP06 起）：纯代码 Three.js**（起点 `threejs\ep05pure\`，标准见交接文件第十八节），不用 Blender，不读外部模型和图片。28 个 Blender 技能已撤到 `_archive\blender-skills-2026-11-27\`（要恢复就搬回 `.claude\skills\`）。
 本集文件夹 `Out\epNN-名字\`，下面的路径都相对它。每步做完更新本集网页墙。细则见频道制作指南和 `Out\错题本.md`。
 
 | # | 步骤 | 必须用 | 产出 | 关口 |
@@ -8,10 +9,10 @@
 | 1 | 选题、写故事 | 网上核实；空间事实（谁在哪侧、往哪走）至少两个机位或两个来源互证 | `story.md`（故事 + 事实表，每个数字带来源，没公开的标 ILLUSTRATIVE）| **停** |
 | 2 | ElevenLabs 做旁白 | ElevenLabs MCP（未连上就先问 Chris）；声音 Daniel - Steady Broadcaster | `vo\` 旁白音频；稿子念一遍删重复词 | |
 | 3 | Whisper 逐词时间 | Whisper（word timestamps）| `vo\words.json`（每个词的起止时间）；按它排 `shots.csv` 镜头表：每 2–3 秒换画面，5–8 秒一个转折，前 3 秒是钩子 | **停**：旁白 + 镜头表给 Chris |
-| 4 | 角色、造型 | Skill：blender-core → blender-character-rigging / blender-clothing → blender-asset-qa；现成模型优先（带真服装，不许光身人体刷颜色）| `chars\` 每个角色正、侧、背三视图 | **停** |
-| 5 | three.js 预演 | three.js（浏览器里跑，简单体块按真实尺寸）| `previz\index.html`：每个镜头的物体路线和相机怎么走，时间轴对齐 `words.json`；`previz\shots.json`（相机和物体轨迹，第 6 步 Blender 直接读）；`previz\selfcheck.md` 自检记录 | **停**：自检改到没毛病再给 Chris |
-| 6 | 造 3D 世界 | Skill：blender-core、blender-scene-setup、blender-pbr-materials、blender-lighting-lookdev、blender-environment-kits，交前跑 blender-asset-qa | 按 `previz\shots.json` 搭场景；每镜一张风格帧 + 单帧耗时；逻辑检查（见下）| **停** |
-| 7 | 渲染 | Skill：blender-rendering；Colab | 开渲前 `render_estimate.md`：每镜测 1 帧 × 帧数，全片 ≤ 1 小时 | **停**：估算给 Chris，点头才开渲 |
+| 4 | 角色、造型 | 纯代码分节人物（Three.js，可摆姿势、带真服装的形体：衣服、鞋、帽子分件建，不许光身体刷颜色）| `chars\` 每个角色正、侧、背三视图 | **停** |
+| 5 | 导演台预演 | 导演台 `tools\director\`（http://127.0.0.1:8770/director/，直接读纯代码场景），简单体块按真实尺寸 | 每个镜头的物体路线和相机怎么走，时间轴对齐 `words.json`；`previz\shots.json`（相机和物体轨迹，第 6 步纯代码场景直接读）；跑「自动体检」清零；`previz\selfcheck.md` 自检记录 | **停**：自检改到没毛病再给 Chris |
+| 6 | 造 3D 世界 | 纯代码 Three.js（几何、程序贴图、招牌文字全由代码生成）；交接文件第十八节精细度清单 8 条 + 颜色标准 | 按 `previz\shots.json` 搭场景；每镜一张风格帧 + 4 张近景检查图 + 单帧耗时；逻辑检查（见下）| **停** |
+| 7 | 渲染 | `render_pure.mjs`（本机 Edge + 1660 Ti，约 0.09 秒/帧，不用 Colab）| 开渲前 `render_estimate.md`：每镜 `--bench` 测 × 帧数，全片 ≤ 1 小时 | **停**：估算给 Chris，点头才开渲 |
 | 8 | 音效 | Skill：sound-effects + ElevenLabs MCP（不许自写脚本打 API）| `sfx\`：只给画面里看得见的东西配声，每种 3 版测频谱挑；混音时**音效在旁白之下**：有旁白时音效比旁白低 10–12 dB（自动压低），没旁白时回到正常 | |
 | 9 | 字幕 | Remotion | 字幕时间用 `words.json`；Shorts 安全区；一句只淡入一次不许闪；真字体量宽不许出画 | |
 | 10 | 全部组装 | Remotion | 成片（-14 LUFS，峰值 ≤ -1.5 dBFS）+ 手机版 < 20 MB + 缩略图 + 发布文案 + README；交片前按错题本逐条自查 | **停**：交 Chris |
@@ -24,9 +25,14 @@
 5. 逻辑：因果先后对、物理方向对（车往哪飞、影子朝哪）。
 自检记录写进 `previz\selfcheck.md`：每条“过 / 改了什么”。
 
+6. 连续镜头（Chris 11-27）：预演里标 continuous 的切点，相机只写一份，后一镜首键自动等于前一镜末键；之后任何相机修改只改预演这一份，不许在场景代码里单改一边。
+
+## 第 6、7 步之间：导演助手体检（Chris 11-27）
+场景或相机改过，先让导演台重新读场景（纯代码集直接读场景代码；旧 Blender 集跑 `tools\director\export_director.bat`），打开 http://127.0.0.1:8770/director/ 点「自动体检」：镜头卡进模型、露白、水下、贴脸、标签出画、切点跳变、连续镜头断开，逐条清零或确认是故意的，才能报渲染估算开渲。渲染进行时不跑导出。
+
 ## 第 6 步逻辑检查和细节检查
-错题本第一类（空间关系和比例）逐条过；光三关（材质反射、光有设计、近景经得起放大）；blender-asset-qa 报告零问题才出风格帧。
-卡通风格另外三关（2026-11-26 Chris 定，全部必守）：
+错题本第一类（空间关系和比例）逐条过；光三关（材质反射、光有设计、近景经得起放大）；纯代码场景每个场景出 4 张近景检查图（`--cam` 自由机位）并量亮度分布，过了才出风格帧。
+卡通风格另外三关（2026-11-26 Chris 定，卡通集必守）：
 - 画风：`toon\docs\09_LOOK_SPEC.md`，风格帧过 `toon\tools\study\look_check.py`（11 项）。
 - 有水的镜头：`toon\docs\10_HYBRID_WATER.md`（世界卡通、水和光写实、原理用白线、每集一个剖面镜头）。
 - 场景细节：`toon\docs\11_SET_DETAIL.md` 八类（车辆含车内、路面、路边设施、植物、建筑、草地、天空天气、共通），逐条写进本集 `set_detail_check.md`。
@@ -48,6 +54,5 @@
 
 ## 闸门（系统自动执行，不靠自觉）
 `.claude\hooks\gate.py` 会拦下：
-- 没先加载 blender-core 技能就跑 Blender（本机、Blender MCP、Colab）。
-- 本集没有 `previz\selfcheck.md`、`set_detail_check.md` 和 `render_estimate.md` 就开渲整段动画（Blender、网页引擎、RENDER*.bat 都算）。
+- 本集没有 `previz\selfcheck.md`、`set_detail_check.md` 和 `render_estimate.md` 就开渲整段动画（`render_pure.mjs` 渲整镜、网页引擎、Blender、RENDER*.bat 都算；`--bench`、`--cam` 和 12 帧以内的 `--frames` 抽帧不算）。
 - 自写脚本直接调 ElevenLabs 音效接口；没加载 sound-effects 技能就用 MCP 出音效。
