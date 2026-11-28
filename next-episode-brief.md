@@ -8,6 +8,7 @@
 - **技术路线（Chris 2026-11-27 定，EP06 起）：纯代码 Three.js**（第十八节），第 4–7 步不用 Blender：人物、场景都用代码建，第 5 步在导演台 `tools\director\` 预演（要改成直接读纯代码场景），第 7 步本机 `render_pure.mjs` 渲。28 个 Blender 技能已删除（11-27 Chris 定；Blender MCP 连接器保留）。
 - 闸门已装（本机 `.claude\settings.json` + `.claude\hooks\gate.py`）：没有 `previz\selfcheck.md`、`set_detail_check.md` 和 `render_estimate.md` 不许渲整段动画（`render_pure.mjs` 渲整镜、Blender -a、RENDER*.bat；`--bench`、`--cam`、12 帧以内的 `--frames` 不算）；音效不许自写脚本打 API，只能先加载 sound-effects 技能再走 ElevenLabs MCP。原来“没加载 blender-core 不许跑 Blender”那条 11-27 随 Blender 技能一起撤了。
 - 和旧章节冲突时以本节为准：逐词时间改用 Whisper（取代第十一节的 ElevenLabs 强制对齐）；音效走 MCP（取代二·五「先找库里现成的」）；开渲门槛统一 1 小时；渲染在本机（纯代码约 0.09 秒/帧），不用 Colab。
+- **给 Chris 看之前先自检（Chris 2026-11-28 定）**：每一步交出去之前自己先按自检清单查完、改完重查，人物是重点（手脚前后、走路、穿模、互动站位），细则见 `WORKFLOW.md` 第 5 步自检第 7 条；EP06 预演 v1 没查人物就交，被 Chris 看出一堆错。
 - 讲故事学 RicksClips 的真实套路（`toon\docs\02_SCRIPT_WRITING.md`、`07_RICKS_DEEP_STUDY.md`）：一个人、一个诡计、一个反转；四种钩子（反常动作、悖论、对“你”说、规矩或传说）；不许每集照搬同一个结构（EP06 开工时误把 EP05 的“三个嫌疑人”当成固定套路，被纠正）。
 
 写于 2026-11-22，根据 Vulcan 那一集（成片在 `Out\ep02-rocket amazon\`）的复盘整理。
